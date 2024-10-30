@@ -7,7 +7,7 @@ interface IPlayListStore {
   addPlayList: (playItem: IHymn) => void;
   removePlayList: (playItem: IHymn) => void;
   playIndex: number | null;
-  setPlayIndex: (playIndex: number) => void;
+  setPlayIndex: (playIndex: number | null) => void;
   isPlaying: boolean;
   setIsPlaying: (isPlaying: boolean) => void;
   enablePlaySet: Set<number>;

@@ -46,6 +46,15 @@ export default function AudioPlayer({ setShowPlayListAction }: IAudioPlayer) {
     const enablePlayArray = Array.from(enablePlaySet);
     const currentIndex = enablePlayArray.indexOf(playIndex);
 
+    if (enablePlayArray.length === 1) {
+      if (audioRef.current) {
+        audioRef.current.currentTime = 0;
+        audioRef.current?.play();
+        setIsPlaying(true);
+        return;
+      }
+    }
+
     // 현재 인덱스가 enablePlaySet에 있는 경우 이전 값 가져오기
     if (currentIndex > 0) {
       setPlayIndex(enablePlayArray[currentIndex - 1]);
@@ -75,6 +84,15 @@ export default function AudioPlayer({ setShowPlayListAction }: IAudioPlayer) {
     // enablePlaySet을 배열로 변환하여 인덱스 찾기
     const enablePlayArray = Array.from(enablePlaySet);
     const currentIndex = enablePlayArray.indexOf(playIndex);
+
+    if (enablePlayArray.length === 1) {
+      if (audioRef.current) {
+        audioRef.current.currentTime = 0;
+        audioRef.current?.play();
+        setIsPlaying(true);
+        return;
+      }
+    }
 
     // 현재 인덱스가 enablePlaySet에 있는 경우 다음 값 가져오기
     if (currentIndex !== -1 && currentIndex < enablePlayArray.length - 1) {
@@ -118,9 +136,11 @@ export default function AudioPlayer({ setShowPlayListAction }: IAudioPlayer) {
   };
 
   /** 재생시간 프로그래스 바 이동 */
-  const handleMouseMove = (event: MouseEvent) => {
+  const handleMouseMove = (event: MouseEvent | TouchEvent) => {
+    const clientX =
+      event instanceof MouseEvent ? event.clientX : event.touches[0].clientX;
     if (isDragging) {
-      updateProgress(event.clientX);
+      updateProgress(clientX);
     }
   };
 
@@ -172,10 +192,14 @@ export default function AudioPlayer({ setShowPlayListAction }: IAudioPlayer) {
   useEffect(() => {
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mouseup", handleMouseUp);
+    window.addEventListener("touchmove", handleMouseMove);
+    window.addEventListener("touchend", handleMouseUp);
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("touchmove", handleMouseMove);
+      window.removeEventListener("touchend", handleMouseUp);
     };
   }, [isDragging]);
 
