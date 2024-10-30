@@ -1,4 +1,6 @@
-export const prints: IHymn[] = [
+import { IHymn } from "@/app/variables/interfaces";
+
+const printsMock = [
   /**{ src: "프린트_001.jpg", title: "1.예수예수" },
   { src: "프린트_002.jpg", title: "2.나는가네" },
   {
@@ -160,3 +162,8 @@ export const prints: IHymn[] = [
   { src: "프린트_064.jpg", title: "64.내주를가까이더욱가까이" },
   { src: "프린트_065.jpg", title: "65.임재" },
 ];
+
+export const prints: IHymn[] = printsMock.map((print) => ({
+  ...print,
+  type: "print",
+}));

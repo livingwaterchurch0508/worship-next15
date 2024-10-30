@@ -1,4 +1,6 @@
-export const pastors: IHymn[] = [
+import { IHymn } from "@/app/variables/interfaces";
+
+const pastorsMock = [
   { src: "1_하나님나라.jpg", title: "1.하나님나라", song: "하나님나라.m4a" },
   { src: "2_주를찬양.jpg", title: "2.주를찬양" },
   { src: "3_아름다운교회.jpg", title: "3.아름다운교회" },
@@ -21,7 +23,10 @@ export const pastors: IHymn[] = [
     title: "11.아침이슬내린그아침에",
     isMulti: 2,
   },
-  { src: "11_아침이슬내린그아침에-1.jpg", title: "11.아침이슬내린그아침에" },
+  {
+    src: "11_아침이슬내린그아침에-1.jpg",
+    title: "11.아침이슬내린그아침에",
+  },
   { src: "12_주님의마음.jpg", title: "12.주님의마음", song: "주님의마음.m4a" },
   {
     src: "13_주님의뜻이뤄지도록.jpg",
@@ -58,7 +63,10 @@ export const pastors: IHymn[] = [
     title: "22.주님의뜻안에가는길에",
     isMulti: 2,
   },
-  { src: "22_주님의뜻안에가는길에-1.jpg", title: "22.주님의뜻안에가는길에" },
+  {
+    src: "22_주님의뜻안에가는길에-1.jpg",
+    title: "22.주님의뜻안에가는길에",
+  },
   { src: "23_여호와하나님.jpg", title: "23.여호와하나님" },
   { src: "24_그한사람인나.jpg", title: "24.그한사람인나" },
   { src: "25_주님께영광높여찬양해.jpg", title: "25.주님께영광높여찬양해" },
@@ -98,3 +106,8 @@ export const pastors: IHymn[] = [
     song: "예수사랑(들으소서).m4a",
   },
 ];
+
+export const pastors: IHymn[] = pastorsMock.map((pastor) => ({
+  ...pastor,
+  type: "pastor",
+}));

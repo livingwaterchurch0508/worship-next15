@@ -1,4 +1,6 @@
-export const michaels: IHymn[] = [
+import { IHymn } from "@/app/variables/interfaces";
+
+const michaelMock = [
   {
     src: "주의거룩하심.jpg",
     song: "주의거룩하심.m4a",
@@ -237,3 +239,8 @@ export const michaels: IHymn[] = [
     title: "17. 하나님의은혜",
   },
 ];
+
+export const michaels: IHymn[] = michaelMock.map((michael) => ({
+  ...michael,
+  type: "michael",
+}));

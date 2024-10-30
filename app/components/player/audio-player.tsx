@@ -1,49 +1,225 @@
 "use client";
-import { ChevronDown, Play, Rows4, StepBack, StepForward } from "lucide-react";
 
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/app/components/ui/card";
+  BookOpen,
+  Pause,
+  Play,
+  Rows4,
+  StepBack,
+  StepForward,
+} from "lucide-react";
+
+import { Card } from "@/app/components/ui/card";
 import { Button } from "@/app/components/ui/button";
 import { Progress } from "@/app/components/ui/progress";
+import { Label } from "@/app/components/ui/label";
 
-export default function AudioPlayer() {
+import { usePlayListStore } from "@/app/stores/play-list-store";
+import { useScoreItemStore } from "@/app/stores/score-item-store";
+import { IAudioPlayer } from "@/app/variables/interfaces";
+
+export default function AudioPlayer({ setShowPlayListAction }: IAudioPlayer) {
+  const {
+    playList,
+    playIndex,
+    setPlayIndex,
+    isPlaying,
+    setIsPlaying,
+    enablePlaySet,
+  } = usePlayListStore((state) => state);
+  const { setScoreIndex } = useScoreItemStore((state) => state);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const progressBarRef = useRef<HTMLDivElement | null>(null);
+  const [progress, setProgress] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+
+  const handleShowPlayList = useCallback(() => {
+    setShowPlayListAction((prev) => !prev);
+  }, [setShowPlayListAction]);
+
+  /** 이전 곡 재생하기 */
+  const handlePrevPlay = () => {
+    if (playIndex === null) return;
+
+    // enablePlaySet을 배열로 변환하여 인덱스 찾기
+    const enablePlayArray = Array.from(enablePlaySet);
+    const currentIndex = enablePlayArray.indexOf(playIndex);
+
+    // 현재 인덱스가 enablePlaySet에 있는 경우 이전 값 가져오기
+    if (currentIndex > 0) {
+      setPlayIndex(enablePlayArray[currentIndex - 1]);
+    } else {
+      // 첫 번째 값이면 마지막 값으로 순환
+      setPlayIndex(enablePlayArray[enablePlayArray.length - 1]);
+    }
+  };
+
+  /** 재생하기 / 멈추기 */
+  const handlePlay = () => {
+    if (playIndex === null) return;
+
+    if (isPlaying) {
+      audioRef.current?.pause();
+    } else {
+      audioRef.current?.play();
+    }
+
+    setIsPlaying(!isPlaying);
+  };
+
+  /** 다음 곡 재생하기 */
+  const handleNextPlay = () => {
+    if (playIndex === null) return;
+
+    // enablePlaySet을 배열로 변환하여 인덱스 찾기
+    const enablePlayArray = Array.from(enablePlaySet);
+    const currentIndex = enablePlayArray.indexOf(playIndex);
+
+    // 현재 인덱스가 enablePlaySet에 있는 경우 다음 값 가져오기
+    if (currentIndex !== -1 && currentIndex < enablePlayArray.length - 1) {
+      // 다음 값이 있으면 설정
+      setPlayIndex(enablePlayArray[currentIndex + 1]);
+    } else {
+      // 마지막 값이면 첫 번째 값으로 순환
+      setPlayIndex(enablePlayArray[0]);
+    }
+  };
+
+  /** 재생 시간 업데이트하기 */
+  const handleTimeUpdate = () => {
+    if (!audioRef.current) return;
+    const currentTime = audioRef.current.currentTime;
+    const duration = audioRef.current.duration;
+
+    if (duration > 0) {
+      setProgress((currentTime / duration) * 100);
+    }
+  };
+
+  /** 재생시간 프로그래스 업데이트 하기 */
+  const updateProgress = (clientX: number) => {
+    const audio = audioRef.current;
+    const progressBar = progressBarRef.current;
+    if (!audio || !progressBar) return;
+
+    const rect = progressBar.getBoundingClientRect();
+    const clickPositionX = clientX - rect.left;
+    const clickRatio = Math.max(0, Math.min(clickPositionX / rect.width, 1));
+
+    audio.currentTime = audio.duration * clickRatio;
+    setProgress(clickRatio * 100);
+  };
+
+  /** 재생시간 프로그래스 바 선택 */
+  const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
+    setIsDragging(true);
+    updateProgress(event.clientX);
+  };
+
+  /** 재생시간 프로그래스 바 이동 */
+  const handleMouseMove = (event: MouseEvent) => {
+    if (isDragging) {
+      updateProgress(event.clientX);
+    }
+  };
+
+  /** 재생시간 프로그래스 바 떼기 */
+  const handleMouseUp = () => {
+    setIsDragging(false);
+    if (!isPlaying && playIndex !== null) {
+      audioRef.current?.play();
+      setIsPlaying(true);
+    }
+  };
+
+  /** 재생 종료시 */
+  const handleAudioEnded = () => {
+    handleNextPlay();
+  };
+
+  useEffect(() => {
+    const audio = audioRef.current;
+
+    if (audio) {
+      audio.addEventListener("timeupdate", handleTimeUpdate);
+      audio.addEventListener("ended", handleAudioEnded);
+      if (playIndex !== null) {
+        if (audio.src) {
+          const audioSrcPath = decodeURIComponent(
+            new URL(audio.src).pathname.split("/").pop() || "",
+          );
+          if (playList[playIndex].song === audioSrcPath) {
+            return;
+          }
+        }
+
+        audio.src = playList[playIndex].song
+          ? `/songs/${playList[playIndex].song}`
+          : "";
+        if (isPlaying) {
+          audio.play();
+        }
+      }
+    }
+
+    return () => {
+      audio?.removeEventListener("timeupdate", handleTimeUpdate);
+      audio?.removeEventListener("ended", handleAudioEnded);
+    };
+  }, [playIndex, isPlaying]);
+
+  useEffect(() => {
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [isDragging]);
+
   return (
     <Card>
-      <audio className="hidden" />
-      <CardHeader>
-        <div className="flex justify-between">
-          <Button variant="ghost" size="icon">
+      <audio ref={audioRef} className="hidden" />
+      <div className="flex w-full">
+        <div className="pl-2 pr-2">
+          <Button variant="ghost" size="icon" onClick={handleShowPlayList}>
             <Rows4 />
           </Button>
-          <Button variant="ghost" size="icon">
-            <ChevronDown />
+        </div>
+        <div className="flex items-center overflow-hidden w-full">
+          <Label className="whitespace-nowrap animate-marquee">
+            {(playIndex !== null && playList[playIndex]?.title) ||
+              "선택된 찬양이 없습니다."}
+          </Label>
+        </div>
+        <div className="min-w-[160px]">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => playIndex !== null && setScoreIndex(playIndex)}
+          >
+            <BookOpen />
           </Button>
-        </div>
-      </CardHeader>
-      <CardContent>
-        <div className="flex justify-center mb-4">
-          <CardTitle>제목</CardTitle>
-        </div>
-        <div className="flex justify-between">
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" onClick={handlePrevPlay}>
             <StepBack />
           </Button>
-          <Button variant="ghost" size="icon">
-            <Play />
+          <Button variant="ghost" size="icon" onClick={handlePlay}>
+            {isPlaying ? <Pause /> : <Play />}
           </Button>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" onClick={handleNextPlay}>
             <StepForward />
           </Button>
         </div>
-      </CardContent>
-      <CardFooter>
-        <Progress value={33} />
-      </CardFooter>
+      </div>
+      <div
+        ref={progressBarRef}
+        onMouseDown={handleMouseDown}
+        className="cursor-pointer"
+      >
+        <Progress value={progress} />
+      </div>
     </Card>
   );
 }
