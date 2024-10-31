@@ -3,37 +3,49 @@
 import { Button } from "@/app/components/ui/button";
 
 import { useOpenHelpStore } from "@/app/stores/open-help-store";
+import { useIsMobile } from "@/app/hooks/use-mobile";
 
 export default function Help() {
+  const isMobile = useIsMobile();
   const { openHelp, setOpenHelp } = useOpenHelpStore((state) => state);
 
   return openHelp ? (
     <div className="fixed inset-0 bg-black bg-opacity-75 z-10">
-      <div className="fixed left-2 top-3 w-10 h-10 border-2 border-white text-white items-center text-center text-sm">
-        메뉴 이동
+      <div>
+        <div
+          className={`fixed left-2 top-3 w-10 h-${isMobile ? "10" : "[200px]"} border-2 border-white text-white items-center text-center text-sm`}
+        >
+          메뉴 이동
+        </div>
+        <div className="fixed left-32 top-3 w-10 h-10 border-2 border-white text-white items-center text-center text-sm">
+          메뉴 이동
+        </div>
+        <div className="fixed right-[24px] top-3 w-[38px] h-10 border-2 border-white text-white items-center text-center text-sm">
+          테마 선택
+        </div>
+        <div className="fixed right-[64px] top-3 w-[38px] h-10 border-2 border-white text-white items-center text-center text-sm">
+          <pre>{`도움말\n보기`}</pre>
+        </div>
+        <div className="fixed right-[104px] top-3 w-[38px] h-10 border-2 border-white text-white items-center text-center text-sm">
+          숙제 보기
+        </div>
+        <div className="fixed right-[144px] top-3 w-[38px] h-10 border-2 border-white text-white items-center text-center text-sm">
+          전체 검색
+        </div>
       </div>
-      <div className="fixed left-32 top-3 w-10 h-10 border-2 border-white text-white items-center text-center text-sm">
-        메뉴 이동
-      </div>
-      <div className="fixed right-[24px] top-3 w-[38px] h-10 border-2 border-white text-white items-center text-center text-sm">
-        테마 선택
-      </div>
-      <div className="fixed right-[64px] top-3 w-[38px] h-10 border-2 border-white text-white items-center text-center text-sm">
-        <pre>{`도움말\n보기`}</pre>
-      </div>
-      <div className="fixed right-[104px] top-3 w-[38px] h-10 border-2 border-white text-white items-center text-center text-sm">
-        숙제 보기
-      </div>
-      <div className="fixed right-[144px] top-3 w-[38px] h-10 border-2 border-white text-white items-center text-center text-sm">
-        전체 검색
-      </div>
-      <div className="fixed left-[20px] top-[88px] w-[calc(21dvw)] h-10 border-2 border-white text-white items-center text-center text-sm">
+      <div
+        className={`fixed ${isMobile ? "left-[20px] w-[calc(21dvw)]" : "left-[80px] w-[calc(21dvw)]"} top-[88px] h-10 border-2 border-white text-white items-center text-center text-sm`}
+      >
         <pre>{`해당 메뉴\n제한 검색`}</pre>
       </div>
-      <div className="fixed left-[calc(21dvw+22px)] top-[88px] w-[7dvw] h-10 border-2 border-white text-white items-center text-center text-sm">
+      <div
+        className={`fixed ${isMobile ? "left-[calc(21dvw+22px)] w-[7dvw]" : "left-[30vw] w-[44px]"} top-[88px]  h-10 border-2 border-white text-white items-center text-center text-sm`}
+      >
         <pre>{`목록\n닫기`}</pre>
       </div>
-      <div className="fixed left-[20px] top-[140px] w-[calc(28dvw)] h-[calc(100dvh-170px)] border-2 border-white text-white items-center text-center text-sm">
+      <div
+        className={`fixed ${isMobile ? "left-[20px]" : "left-[60px]"} top-[140px] w-[calc(28dvw)] h-[calc(100dvh-170px)] border-2 border-white text-white items-center text-center text-sm`}
+      >
         <pre>{`메뉴에\n해당하는\n목록`}</pre>
       </div>
       <div className="fixed right-[20px] top-[88px] w-[60vw] h-[60dvh] border-2 border-white text-white items-center text-center text-sm">
@@ -54,7 +66,9 @@ export default function Help() {
       <div className="fixed right-[144px] bottom-[20px] w-[40px] h-[44px] border-2 border-white text-white items-center text-center text-sm">
         <pre>{`악보\n보기`}</pre>
       </div>
-      <div className="fixed left-[calc(30dvw+15px)] bottom-[20px] w-[40px] h-[44px] border-2 border-white text-white items-center text-center text-sm">
+      <div
+        className={`fixed ${isMobile ? "left-[calc(30dvw+15px)]" : "left-[calc(30dvw+44px)]"}  bottom-[20px] w-[40px] h-[44px] border-2 border-white text-white items-center text-center text-sm`}
+      >
         <pre>{`재생목록\n보기`}</pre>
       </div>
       <Button
