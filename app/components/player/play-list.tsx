@@ -51,7 +51,7 @@ export default function PlayList({
     >
       <CardHeader>
         <div className="flex justify-between items-center">
-          <CardTitle>노래 목록</CardTitle>
+          <CardTitle>재생 목록</CardTitle>
           <Button variant="ghost" size="icon" onClick={closePlayList}>
             <ChevronDown />
           </Button>

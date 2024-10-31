@@ -14,6 +14,7 @@ import { ModeToggle } from "@/app/components/mode-toggle";
 import { AppBreadcrumbs } from "@/app/components/app-breadcrumbs";
 import NavSearchBar from "@/app/components/nav/nav-search-bar";
 import NavHomework from "@/app/components/nav/nav-homework";
+import NavInfo from "@/app/components/nav/nav-info";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -65,6 +66,7 @@ export default function RootLayout({
                   <div className="flex items-center gap-2 text-sm">
                     <NavSearchBar />
                     <NavHomework />
+                    <NavInfo />
                     <ModeToggle />
                   </div>
                 </div>
