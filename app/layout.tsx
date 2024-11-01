@@ -28,8 +28,21 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "생수가 흐르는 교회 찬양집",
-  description: "오늘도 승리해요",
+  title: "생수가 흐르는 교회💒 찬양집",
+  description: "생수가 흐르는 교회에 오신걸 환영합니다!",
+  openGraph: {
+    title: "생수가 흐르는 교회💒",
+    description: "생수가 흐르는 교회에 오신걸 환영합니다!",
+    images: [
+      {
+        url: "https://livingwater-church.co.kr/home_banner.png",
+        width: 1134,
+        height: 805,
+        alt: "홈 배너",
+      },
+    ],
+    type: "website",
+  },
   icons: {
     icon: "https://livingwater-church.co.kr/home_banner.png",
   },
