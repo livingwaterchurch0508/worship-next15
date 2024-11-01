@@ -16,7 +16,8 @@ import { Input } from "@/app/components/ui/input";
 import { includeByCho } from "@/app/lib/search-util";
 import { usePlayListStore } from "@/app/stores/play-list-store";
 import { IHymn } from "@/app/variables/interfaces";
-import { MENU_TITLES, WORSHIPS } from "@/app/variables/enums";
+import { MENU_TITLES, SORT_TYPES, WORSHIPS } from "@/app/variables/enums";
+import { arraySort } from "@/app/lib/array-util";
 
 export default function NavSearchBar() {
   const { addPlayList } = usePlayListStore((state) => state);
@@ -31,12 +32,16 @@ export default function NavSearchBar() {
     }
 
     setWorshipList(
-      [
-        ...WORSHIPS.hymn,
-        ...WORSHIPS.michael,
-        ...WORSHIPS.pastor,
-        ...WORSHIPS.print,
-      ].filter(({ title }) => includeByCho(search, title)),
+      arraySort(
+        [
+          ...WORSHIPS.hymn,
+          ...WORSHIPS.michael,
+          ...WORSHIPS.pastor,
+          ...WORSHIPS.print,
+        ].filter(({ title }) => includeByCho(search, title)),
+        SORT_TYPES.NUMBER_ASC,
+        false,
+      ),
     );
   }, [search]);
 
