@@ -14,10 +14,10 @@ import { ScrollArea } from "@/app/components/ui/scroll-area";
 import { Input } from "@/app/components/ui/input";
 
 import { includeByCho } from "@/app/lib/search-util";
+import { arraySort, setTextColor } from "@/app/lib/array-util";
 import { usePlayListStore } from "@/app/stores/play-list-store";
 import { IHymn } from "@/app/variables/interfaces";
 import { MENU_TITLES, SORT_TYPES, WORSHIPS } from "@/app/variables/enums";
-import { arraySort } from "@/app/lib/array-util";
 
 export default function NavSearchBar() {
   const { addPlayList } = usePlayListStore((state) => state);
@@ -66,10 +66,12 @@ export default function NavSearchBar() {
               value={search}
               onChange={handleChange}
             />
-            <CircleX
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 cursor-pointer"
-              onClick={() => setSearch("")}
-            />
+            {search.length > 0 && (
+              <CircleX
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 cursor-pointer"
+                onClick={() => setSearch("")}
+              />
+            )}
           </div>
         </div>
         <ScrollArea
@@ -85,7 +87,7 @@ export default function NavSearchBar() {
               <div key={`worship-${index}`} className="w-full">
                 <div className="flex items-center">
                   <span
-                    className="cursor-pointer"
+                    className={`cursor-pointer ${setTextColor(worship)}`}
                     onClick={() => addPlayList(worship)}
                   >
                     {`${MENU_TITLES[worship.type].substring(0, 1)} ${worship.title}`}

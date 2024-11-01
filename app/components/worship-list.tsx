@@ -9,7 +9,7 @@ import { ResizablePanel } from "@/app/components/ui/resizable";
 import { Button } from "@/app/components/ui/button";
 
 import { includeByCho } from "@/app/lib/search-util";
-import { arraySort } from "@/app/lib/array-util";
+import { arraySort, setTextColor } from "@/app/lib/array-util";
 import { useActiveItemStore } from "@/app/stores/active-item-store";
 import { useIsFullScreenStore } from "@/app/stores/full-screen-store";
 import { usePlayListStore } from "@/app/stores/play-list-store";
@@ -73,10 +73,12 @@ export default function WorshipList() {
             value={search}
             onChange={handleChange}
           />
-          <CircleX
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 cursor-pointer"
-            onClick={() => setSearch("")}
-          />
+          {search.length > 0 && (
+            <CircleX
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 cursor-pointer"
+              onClick={() => setSearch("")}
+            />
+          )}
         </div>
         {!isFullScreen && (
           <Button
@@ -97,7 +99,7 @@ export default function WorshipList() {
             <div key={`${activeItem.menuType}-${index}`} className="w-full">
               <div className="flex items-center">
                 <span
-                  className="cursor-pointer"
+                  className={`cursor-pointer text ${setTextColor(worship)}`}
                   onClick={() => addPlayList(worship)}
                 >
                   {worship.title}

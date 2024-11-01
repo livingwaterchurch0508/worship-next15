@@ -61,3 +61,10 @@ export function arraySort(array: IHymn[], order: TSortType, isHymn: boolean) {
     koreanSort(filterMulti(filterIsHymn(array, isHymn)), order),
   );
 }
+
+export function setTextColor(hymn: IHymn) {
+  if (hymn?.isHomework) return "text-red-600 dark:text-red-400";
+  if (hymn?.isThisWeek) return "text-yellow-600 dark:text-yellow-400";
+  if (!!hymn?.song) return "text-blue-600 dark:text-blue-400";
+  return "text-gray-600 dark:text-gray-400";
+}

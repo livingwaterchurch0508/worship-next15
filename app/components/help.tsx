@@ -46,13 +46,23 @@ export default function Help() {
       <div
         className={`fixed ${isMobile ? "left-[20px]" : "left-[60px]"} top-[140px] w-[calc(28dvw)] h-[calc(100dvh-170px)] border-2 border-white text-white items-center text-center text-sm`}
       >
-        <pre>{`메뉴에\n해당하는\n목록`}</pre>
+        <pre>
+          {`메뉴에\n해당하는\n목록\n\n\n\n\n\n`}
+          <span className="text-red-300">빨간색</span>
+          {`:숙제\n`}
+          <span className="text-yellow-300">노란색</span>
+          {`:이번주\n`}
+          <span className="text-blue-300">파란색</span>
+          {`:음원+악보\n`}
+          <span className="text-gray-300">회색</span>
+          {`:악보만`}
+        </pre>
       </div>
       <div className="fixed right-[20px] top-[88px] w-[60vw] h-[60dvh] border-2 border-white text-white items-center text-center text-sm">
         악보 영역
       </div>
       <div className="fixed right-[20px] bottom-[66px] w-[60vw] h-[17dvh] border-2 border-white text-white items-center text-center text-sm">
-        재생목록
+        <pre>{`재생목록\n\n좌측이나 위 검색창에서 \n검색된 목록에서 선택하여\n재생목록에 추가합니다.`}</pre>
       </div>
       <div className="fixed right-[24px] bottom-[20px] w-[40px] h-[44px] border-2 border-white text-white items-center text-center text-sm">
         <pre>{`다음\n재생`}</pre>
