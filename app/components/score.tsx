@@ -53,18 +53,27 @@ export default function Score() {
       className="w-full overflow-auto"
       style={{ height: "calc(100dvh - 170px)" }}
     >
-      {currentPlayItem !== null && currentPlayItem
-        ? Array.from({ length: currentPlayItem?.isMulti || 1 }).map((_, i) => (
-            <AspectRatio ratio={1 / 1.414} className="bg-muted" key={i}>
-              <Image
-                src={setScorePath(currentPlayItem, i)}
-                alt="Image"
-                className="w-full rounded-md"
-                fill
-              />
-            </AspectRatio>
-          ))
-        : null}
+      {currentPlayItem !== null && currentPlayItem ? (
+        Array.from({ length: currentPlayItem?.isMulti || 1 }).map((_, i) => (
+          <AspectRatio ratio={1 / 1.414} className="bg-muted" key={i}>
+            <Image
+              src={setScorePath(currentPlayItem, i)}
+              alt="Image"
+              className="w-full rounded-md"
+              fill
+            />
+          </AspectRatio>
+        ))
+      ) : (
+        <AspectRatio ratio={1 / 1.414} className="bg-muted">
+          <Image
+            src="/carousel/2.jpg"
+            alt="Image"
+            className="w-full rounded-md"
+            fill
+          />
+        </AspectRatio>
+      )}
     </div>
   );
 }
