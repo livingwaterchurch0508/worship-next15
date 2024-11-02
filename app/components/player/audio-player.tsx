@@ -163,18 +163,28 @@ export default function AudioPlayer({
 
   useEffect(() => {
     const audio = audioRef.current;
-
     if (audio) {
       audio.addEventListener("timeupdate", handleTimeUpdate);
       audio.addEventListener("ended", handleAudioEnded);
+    }
+    return () => {
+      audio?.removeEventListener("timeupdate", handleTimeUpdate);
+      audio?.removeEventListener("ended", handleAudioEnded);
+    };
+  }, [playIndex, enablePlaySet]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+
+    if (audio) {
       if (playIndex === null) {
         audio.pause();
       }
-
       if (playIndex !== null) {
         const findIndex = playList.findIndex(
           ({ index }) => index === playIndex,
         );
+
         if (findIndex === -1) return;
 
         if (audio.src) {
@@ -190,23 +200,17 @@ export default function AudioPlayer({
             return;
           }
         }
-
+        audio.pause();
         audio.src = playList[findIndex].song
           ? `/songs/${playList[findIndex].song}`
           : "";
 
         if (isPlaying) {
           audio.play();
-          return;
         }
       }
     }
-
-    return () => {
-      audio?.removeEventListener("timeupdate", handleTimeUpdate);
-      audio?.removeEventListener("ended", handleAudioEnded);
-    };
-  }, [playIndex, isPlaying]);
+  }, [playIndex, isPlaying, enablePlaySet]);
 
   useEffect(() => {
     window.addEventListener("mousemove", handleMouseMove);
