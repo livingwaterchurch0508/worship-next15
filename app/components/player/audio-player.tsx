@@ -17,9 +17,12 @@ import { Label } from "@/app/components/ui/label";
 
 import { usePlayListStore } from "@/app/stores/play-list-store";
 import { useScoreItemStore } from "@/app/stores/score-item-store";
-import { IAudioPlayer } from "@/app/variables/interfaces";
+import { IPlayList } from "@/app/variables/interfaces";
 
-export default function AudioPlayer({ setShowPlayListAction }: IAudioPlayer) {
+export default function AudioPlayer({
+  showPlayList,
+  setShowPlayListAction,
+}: IPlayList) {
   const {
     playList,
     playIndex,
@@ -28,7 +31,7 @@ export default function AudioPlayer({ setShowPlayListAction }: IAudioPlayer) {
     setIsPlaying,
     enablePlaySet,
   } = usePlayListStore((state) => state);
-  const { setScoreIndex } = useScoreItemStore((state) => state);
+  const { scoreIndex, setScoreIndex } = useScoreItemStore((state) => state);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const progressBarRef = useRef<HTMLDivElement | null>(null);
   const [progress, setProgress] = useState(0);
@@ -225,7 +228,10 @@ export default function AudioPlayer({ setShowPlayListAction }: IAudioPlayer) {
       <div className="flex w-full">
         <div className="pl-2 pr-2">
           <Button variant="ghost" size="icon" onClick={handleShowPlayList}>
-            <Rows4 />
+            <Rows4
+              className={showPlayList ? "text-blue-700 dark:text-blue-300" : ""}
+            />
+            🎨
           </Button>
         </div>
         <div className="flex items-center overflow-hidden w-full">
@@ -243,13 +249,23 @@ export default function AudioPlayer({ setShowPlayListAction }: IAudioPlayer) {
             size="icon"
             onClick={() => playIndex !== null && setScoreIndex(playIndex)}
           >
-            <BookOpen />
+            <BookOpen
+              className={
+                scoreIndex === playIndex
+                  ? "text-blue-700 dark:text-blue-300"
+                  : ""
+              }
+            />
           </Button>
           <Button variant="ghost" size="icon" onClick={handlePrevPlay}>
             <StepBack />
           </Button>
           <Button variant="ghost" size="icon" onClick={handlePlay}>
-            {isPlaying ? <Pause /> : <Play />}
+            {isPlaying ? (
+              <Pause className="text-blue-700 dark:text-blue-300" />
+            ) : (
+              <Play className="text-blue-700 dark:text-blue-300" />
+            )}
           </Button>
           <Button variant="ghost" size="icon" onClick={handleNextPlay}>
             <StepForward />

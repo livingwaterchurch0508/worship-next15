@@ -14,7 +14,10 @@ export default function Player() {
         showPlayList={showPlayList}
         setShowPlayListAction={setShowPlayList}
       />
-      <AudioPlayer setShowPlayListAction={setShowPlayList} />
+      <AudioPlayer
+        showPlayList={showPlayList}
+        setShowPlayListAction={setShowPlayList}
+      />
     </div>
   );
 }

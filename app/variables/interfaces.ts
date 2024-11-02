@@ -31,10 +31,7 @@ export interface IPlayHymn extends IHymn {
   index: number;
 }
 
-export interface IAudioPlayer {
-  setShowPlayListAction: Dispatch<SetStateAction<boolean>>;
-}
-
-export interface IPlayList extends IAudioPlayer {
+export interface IPlayList {
   showPlayList: boolean;
+  setShowPlayListAction: Dispatch<SetStateAction<boolean>>;
 }
