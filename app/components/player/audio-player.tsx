@@ -231,7 +231,6 @@ export default function AudioPlayer({
             <Rows4
               className={showPlayList ? "text-blue-700 dark:text-blue-300" : ""}
             />
-            🎨
           </Button>
         </div>
         <div className="flex items-center overflow-hidden w-full">
