@@ -10,9 +10,8 @@ import { useScoreItemStore } from "@/app/stores/score-item-store";
 import { IHymn } from "@/app/variables/interfaces";
 
 export default function Score() {
-  const { playIndex, playList, enablePlaySet } = usePlayListStore(
-    (state) => state,
-  );
+  const { playIndex, setPlayIndex, playList, enablePlaySet, setIsPlaying } =
+    usePlayListStore((state) => state);
   const { scoreIndex, setScoreIndex } = useScoreItemStore((state) => state);
 
   const [currentPlayItem, setCurrentPlayItem] = useState<IHymn | null>(null);
@@ -25,13 +24,27 @@ export default function Score() {
           : undefined;
 
       if (enableFirstPlayItem === undefined) {
-        if (playList.length > 0) setScoreIndex(1);
+        if (playList.length > 0) {
+          setScoreIndex(playList[0].index);
+          return;
+        }
+        setScoreIndex(null);
+        setCurrentPlayItem(null);
         return;
+      }
+
+      if (playList.length > 0) {
+        setScoreIndex(playList[0].index);
+        setPlayIndex(playList[0].index);
+        setIsPlaying(true);
       }
       return;
     }
 
-    if (scoreIndex === null) return;
+    if (scoreIndex === null) {
+      setCurrentPlayItem(null);
+      return;
+    }
     const findIndex = playList.findIndex(({ index }) => index === scoreIndex);
 
     if (findIndex === -1) {

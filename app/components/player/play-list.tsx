@@ -127,6 +127,9 @@ export default function PlayList({
                           setPlayIndex(null);
                           setIsPlaying(false);
                         }
+                        if (scoreIndex === worship.index) {
+                          setScoreIndex(null);
+                        }
                       }}
                     >
                       <X />

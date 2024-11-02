@@ -250,7 +250,7 @@ export default function AudioPlayer({
           >
             <BookOpen
               className={
-                scoreIndex === playIndex
+                scoreIndex !== null && scoreIndex === playIndex
                   ? "text-blue-700 dark:text-blue-300"
                   : ""
               }
@@ -261,9 +261,17 @@ export default function AudioPlayer({
           </Button>
           <Button variant="ghost" size="icon" onClick={handlePlay}>
             {isPlaying ? (
-              <Pause className="text-blue-700 dark:text-blue-300" />
+              <Pause
+                className={
+                  playIndex === null ? "" : "text-blue-700 dark:text-blue-300"
+                }
+              />
             ) : (
-              <Play className="text-blue-700 dark:text-blue-300" />
+              <Play
+                className={
+                  playIndex === null ? "" : "text-blue-700 dark:text-blue-300"
+                }
+              />
             )}
           </Button>
           <Button variant="ghost" size="icon" onClick={handleNextPlay}>
