@@ -27,6 +27,10 @@ export interface IHymn {
   type: TMenuType;
 }
 
+export interface IPlayHymn extends IHymn {
+  index: number;
+}
+
 export interface IAudioPlayer {
   setShowPlayListAction: Dispatch<SetStateAction<boolean>>;
 }

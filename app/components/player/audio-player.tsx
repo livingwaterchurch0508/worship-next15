@@ -164,21 +164,37 @@ export default function AudioPlayer({ setShowPlayListAction }: IAudioPlayer) {
     if (audio) {
       audio.addEventListener("timeupdate", handleTimeUpdate);
       audio.addEventListener("ended", handleAudioEnded);
+      if (playIndex === null) {
+        audio.pause();
+      }
+
       if (playIndex !== null) {
+        const findIndex = playList.findIndex(
+          ({ index }) => index === playIndex,
+        );
+        if (findIndex === -1) return;
+
         if (audio.src) {
           const audioSrcPath = decodeURIComponent(
             new URL(audio.src).pathname.split("/").pop() || "",
           );
-          if (playList[playIndex].song === audioSrcPath) {
+          if (playList[findIndex].song === audioSrcPath) {
+            if (isPlaying) {
+              audio.play();
+              return;
+            }
+            audio.pause();
             return;
           }
         }
 
-        audio.src = playList[playIndex].song
-          ? `/songs/${playList[playIndex].song}`
+        audio.src = playList[findIndex].song
+          ? `/songs/${playList[findIndex].song}`
           : "";
+
         if (isPlaying) {
           audio.play();
+          return;
         }
       }
     }
@@ -214,8 +230,11 @@ export default function AudioPlayer({ setShowPlayListAction }: IAudioPlayer) {
         </div>
         <div className="flex items-center overflow-hidden w-full">
           <Label className="whitespace-nowrap animate-marquee">
-            {(playIndex !== null && playList[playIndex]?.title) ||
-              "선택된 찬양이 없습니다."}
+            {playIndex === null ||
+            playList.findIndex(({ index }) => index === playIndex) === -1
+              ? "선택된 찬양이 없습니다."
+              : playList[playList.findIndex(({ index }) => index === playIndex)]
+                  .title}
           </Label>
         </div>
         <div className="min-w-[160px]">

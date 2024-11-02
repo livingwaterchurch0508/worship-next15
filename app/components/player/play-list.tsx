@@ -29,7 +29,7 @@ export default function PlayList({
     setPlayIndex,
     setIsPlaying,
   } = usePlayListStore((state) => state);
-  const { setScoreIndex } = useScoreItemStore((state) => state);
+  const { scoreIndex, setScoreIndex } = useScoreItemStore((state) => state);
   const [isVisible, setIsVisible] = useState(showPlayList);
 
   useEffect(() => {
@@ -63,35 +63,71 @@ export default function PlayList({
             {playList.map((worship, index) => (
               <div key={index} className="w-full">
                 <div className="flex justify-between">
-                  <span className="truncate">{worship.title}</span>
+                  <span
+                    className={
+                      playIndex === worship.index
+                        ? "text-blue-700 dark:text-blue-300 truncate"
+                        : "truncate"
+                    }
+                  >
+                    {worship.title}
+                  </span>
                   <div className="flex space-x-1">
                     <Button
                       variant="ghost"
                       size="icon"
-                      onClick={() => setScoreIndex(index)}
+                      onClick={() => setScoreIndex(worship.index)}
                     >
-                      <BookOpen />
+                      <BookOpen
+                        className={
+                          scoreIndex === worship.index
+                            ? "text-blue-700 dark:text-blue-300"
+                            : ""
+                        }
+                      />
                     </Button>
                     {!!worship.song && (
                       <Button
                         variant="ghost"
                         size="icon"
                         onClick={() => {
-                          setPlayIndex(index);
-                          setIsPlaying(!isPlaying);
+                          if (playIndex === worship.index) {
+                            setIsPlaying(!isPlaying);
+                            return;
+                          }
+                          setPlayIndex(worship.index);
+                          setIsPlaying(true);
                         }}
                       >
-                        {playIndex === index && isPlaying ? (
-                          <Pause />
+                        {playIndex === worship.index && isPlaying ? (
+                          <Pause
+                            className={
+                              playIndex === worship.index
+                                ? "text-blue-700 dark:text-blue-300"
+                                : ""
+                            }
+                          />
                         ) : (
-                          <Play />
+                          <Play
+                            className={
+                              playIndex === worship.index
+                                ? "text-blue-700 dark:text-blue-300"
+                                : ""
+                            }
+                          />
                         )}
                       </Button>
                     )}
                     <Button
                       variant="ghost"
                       size="icon"
-                      onClick={() => removePlayList(worship)}
+                      onClick={() => {
+                        removePlayList(worship);
+                        if (playIndex === worship.index) {
+                          setPlayIndex(null);
+                          setIsPlaying(false);
+                        }
+                      }}
                     >
                       <X />
                     </Button>

@@ -10,7 +10,7 @@ import { useScoreItemStore } from "@/app/stores/score-item-store";
 import { IHymn } from "@/app/variables/interfaces";
 
 export default function Score() {
-  const { playIndex, setPlayIndex, playList, enablePlaySet } = usePlayListStore(
+  const { playIndex, playList, enablePlaySet } = usePlayListStore(
     (state) => state,
   );
   const { scoreIndex, setScoreIndex } = useScoreItemStore((state) => state);
@@ -25,18 +25,21 @@ export default function Score() {
           : undefined;
 
       if (enableFirstPlayItem === undefined) {
-        if (playList.length > 0) setScoreIndex(0);
+        if (playList.length > 0) setScoreIndex(1);
         return;
       }
-
-      setPlayIndex(enableFirstPlayItem);
-      setScoreIndex(enableFirstPlayItem);
       return;
     }
 
     if (scoreIndex === null) return;
+    const findIndex = playList.findIndex(({ index }) => index === scoreIndex);
 
-    setCurrentPlayItem(playList[scoreIndex]);
+    if (findIndex === -1) {
+      setCurrentPlayItem(null);
+      return;
+    }
+
+    setCurrentPlayItem(playList[findIndex]);
   }, [playIndex, playList, scoreIndex, enablePlaySet]);
 
   const setScorePath = (item: IHymn, index: number) => {

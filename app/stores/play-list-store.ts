@@ -1,9 +1,9 @@
 import { create } from "zustand";
 
-import { IHymn } from "@/app/variables/interfaces";
+import { IHymn, IPlayHymn } from "@/app/variables/interfaces";
 
 interface IPlayListStore {
-  playList: IHymn[];
+  playList: IPlayHymn[];
   addPlayList: (playItem: IHymn) => boolean;
   removePlayList: (playItem: IHymn) => void;
   playIndex: number | null;
@@ -26,9 +26,16 @@ const usePlayListStore = create<IPlayListStore>((set) => ({
         (item: IHymn) => item.title === playItem.title,
       );
       if (!isDuplicate) {
-        const updatedPlayList = [...state.playList, playItem];
+        const lastIndex =
+          state.playList.length === 0
+            ? 1
+            : state.playList[state.playList.length - 1].index + 1;
+        const updatedPlayList = [
+          ...state.playList,
+          { ...playItem, index: lastIndex },
+        ];
         const enablePlayList: number[] = [];
-        updatedPlayList.forEach(({ song }, index) => {
+        updatedPlayList.forEach(({ song, index }) => {
           if (!!song) enablePlayList.push(index);
         });
 
@@ -48,7 +55,7 @@ const usePlayListStore = create<IPlayListStore>((set) => ({
         (item: IHymn) => item.title !== playItem.title,
       );
       const enablePlayList: number[] = [];
-      updatedPlayList.forEach(({ song }, index) => {
+      updatedPlayList.forEach(({ song, index }) => {
         if (!!song) enablePlayList.push(index);
       });
 
