@@ -29,17 +29,37 @@ export default function WorshipList() {
   const [worshipList, setWorshipList] = useState<IHymn[]>([]);
 
   useEffect(() => {
+    const homeworks = [
+      ...WORSHIPS.hymn,
+      ...WORSHIPS.michael,
+      ...WORSHIPS.pastor,
+      ...WORSHIPS.print,
+    ].filter(({ isHomework }) => isHomework);
+
     if (!search) {
       setWorshipList(
-        arraySort(WORSHIPS[activeItem.menuType], SORT_TYPES.NUMBER_ASC, false),
+        arraySort(
+          [
+            ...homeworks,
+            ...WORSHIPS[activeItem.menuType].filter(
+              ({ isHomework }) => !isHomework,
+            ),
+          ],
+          SORT_TYPES.NUMBER_ASC,
+          false,
+        ),
       );
       return;
     }
     setWorshipList(
       arraySort(
-        WORSHIPS[activeItem.menuType].filter(({ title }) =>
-          includeByCho(search, title),
-        ),
+        [
+          ...homeworks,
+          ...WORSHIPS[activeItem.menuType].filter(
+            ({ title, isHomework }) =>
+              !isHomework && includeByCho(search, title),
+          ),
+        ],
         SORT_TYPES.NUMBER_ASC,
         false,
       ),
@@ -77,7 +97,7 @@ export default function WorshipList() {
 
   return (
     <ResizablePanel
-      defaultSize={30}
+      defaultSize={50}
       minSize={15}
       className={`${isFullScreen ? "animate-slide-left-out" : "animate-slide-left-in"} ${
         isFullScreen && !isAnimating ? "hidden" : ""
