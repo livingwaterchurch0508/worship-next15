@@ -13,6 +13,7 @@ import { Separator } from "@/app/components/ui/separator";
 import { ScrollArea } from "@/app/components/ui/scroll-area";
 import { Input } from "@/app/components/ui/input";
 
+import { useToast } from "@/app/hooks/use-toast";
 import { includeByCho } from "@/app/lib/search-util";
 import { arraySort, setTextColor } from "@/app/lib/array-util";
 import { usePlayListStore } from "@/app/stores/play-list-store";
@@ -21,6 +22,7 @@ import { MENU_TITLES, SORT_TYPES, WORSHIPS } from "@/app/variables/enums";
 
 export default function NavSearchBar() {
   const { addPlayList } = usePlayListStore((state) => state);
+  const { toast } = useToast();
 
   const [search, setSearch] = useState("");
   const [worshipList, setWorshipList] = useState<IHymn[]>([]);
@@ -47,6 +49,23 @@ export default function NavSearchBar() {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
+  };
+
+  const handleAddPlayList = (worship: IHymn) => {
+    if (addPlayList(worship)) {
+      toast({
+        title: "재생목록 추가",
+        description: (
+          <p>
+            <span className="text-blue-600 dark:text-blue-400">
+              {worship.title}
+            </span>
+            {"이(가) 추가되었습니다."}
+          </p>
+        ),
+        duration: 2000,
+      });
+    }
   };
 
   return (
@@ -87,8 +106,8 @@ export default function NavSearchBar() {
               <div key={`worship-${index}`} className="w-full">
                 <div className="flex items-center">
                   <span
-                    className={`cursor-pointer ${setTextColor(worship)}`}
-                    onClick={() => addPlayList(worship)}
+                    className={`cursor-pointer truncate ${setTextColor(worship)}`}
+                    onClick={() => handleAddPlayList(worship)}
                   >
                     {`${MENU_TITLES[worship.type].substring(0, 1)} ${worship.title}`}
                   </span>

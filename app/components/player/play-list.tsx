@@ -63,8 +63,8 @@ export default function PlayList({
             {playList.map((worship, index) => (
               <div key={index} className="w-full">
                 <div className="flex justify-between">
-                  <span>{worship.title}</span>
-                  <div>
+                  <span className="truncate">{worship.title}</span>
+                  <div className="flex space-x-1">
                     <Button
                       variant="ghost"
                       size="icon"

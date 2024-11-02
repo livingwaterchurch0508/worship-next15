@@ -4,7 +4,7 @@ import { IHymn } from "@/app/variables/interfaces";
 
 interface IPlayListStore {
   playList: IHymn[];
-  addPlayList: (playItem: IHymn) => void;
+  addPlayList: (playItem: IHymn) => boolean;
   removePlayList: (playItem: IHymn) => void;
   playIndex: number | null;
   setPlayIndex: (playIndex: number | null) => void;
@@ -18,9 +18,11 @@ const usePlayListStore = create<IPlayListStore>((set) => ({
   playIndex: null,
   isPlaying: false,
   enablePlaySet: new Set<number>(),
-  addPlayList: (playItem) =>
+  addPlayList: (playItem) => {
+    let isDuplicate = false;
+
     set((state) => {
-      const isDuplicate = state.playList.some(
+      isDuplicate = state.playList.some(
         (item: IHymn) => item.title === playItem.title,
       );
       if (!isDuplicate) {
@@ -36,7 +38,10 @@ const usePlayListStore = create<IPlayListStore>((set) => ({
         };
       }
       return state;
-    }),
+    });
+
+    return !isDuplicate;
+  },
   removePlayList: (playItem) =>
     set((state) => {
       const updatedPlayList = state.playList.filter(

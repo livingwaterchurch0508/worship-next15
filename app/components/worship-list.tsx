@@ -8,6 +8,7 @@ import { Input } from "@/app/components/ui/input";
 import { ResizablePanel } from "@/app/components/ui/resizable";
 import { Button } from "@/app/components/ui/button";
 
+import { useToast } from "@/app/hooks/use-toast";
 import { includeByCho } from "@/app/lib/search-util";
 import { arraySort, setTextColor } from "@/app/lib/array-util";
 import { useActiveItemStore } from "@/app/stores/active-item-store";
@@ -23,6 +24,7 @@ export default function WorshipList() {
     useIsFullScreenStore((state) => state);
   const { addPlayList } = usePlayListStore((state) => state);
   const { search, setSearch } = useSearchStore((state) => state);
+  const { toast } = useToast();
 
   const [worshipList, setWorshipList] = useState<IHymn[]>([]);
 
@@ -46,6 +48,23 @@ export default function WorshipList() {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
+  };
+
+  const handleAddPlayList = (worship: IHymn) => {
+    if (addPlayList(worship)) {
+      toast({
+        title: "재생목록 추가",
+        description: (
+          <p>
+            <span className="text-blue-600 dark:text-blue-400">
+              {worship.title}
+            </span>
+            {"이(가) 추가되었습니다."}
+          </p>
+        ),
+        duration: 2000,
+      });
+    }
   };
 
   useEffect(() => {
@@ -82,6 +101,7 @@ export default function WorshipList() {
         </div>
         {!isFullScreen && (
           <Button
+            className="min-w-[24px]"
             variant="outline"
             size="icon"
             onClick={() => setIsFullScreen(!isFullScreen)}
@@ -99,8 +119,8 @@ export default function WorshipList() {
             <div key={`${activeItem.menuType}-${index}`} className="w-full">
               <div className="flex items-center">
                 <span
-                  className={`cursor-pointer text ${setTextColor(worship)}`}
-                  onClick={() => addPlayList(worship)}
+                  className={`cursor-pointer truncate ${setTextColor(worship)}`}
+                  onClick={() => handleAddPlayList(worship)}
                 >
                   {worship.title}
                 </span>
