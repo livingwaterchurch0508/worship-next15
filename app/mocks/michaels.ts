@@ -40,6 +40,8 @@ const michaelMock = [
     src: "날마다숨쉬는순간마다.jpg",
     title: "1009. 날마다숨쉬는순간마다",
     song: "1009날마다숨쉬는순간마다.m4a",
+    isThisWeek: true,
+    isHomework: true,
   },
   {
     src: "주나의모든것.jpg",
@@ -156,6 +158,7 @@ const michaelMock = [
     title: "1155. 목적도없이(험한십자가능력있네)",
     song: "목적도없이(험한십자가능력있네).m4a",
     isMulti: 2,
+    isThisWeek: true,
   },
   {
     src: "목적도없이(험한십자가능력있네)-1.jpg",
@@ -232,11 +235,21 @@ const michaelMock = [
     title: "17. 하나님의은혜",
     song: "하나님의은혜.m4a",
     isMulti: 2,
-    isThisWeek: true,
   },
   {
     src: "하나님의은혜-1.jpg",
     title: "17. 하나님의은혜",
+  },
+  {
+    src: "854주님여이손을.jpg",
+    title: "854. 주님여이손을",
+    song: "주님여이곳에.m4a",
+  },
+  {
+    src: "1658하나님은너를지키시는자.jpg",
+    title: "1658.하나님은너를지키시는자",
+    song: "하나님은너를지키시는자.m4a",
+    isThisWeek: true,
   },
 ];
 
