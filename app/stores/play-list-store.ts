@@ -4,6 +4,7 @@ import { IHymn, IPlayHymn } from "@/app/variables/interfaces";
 
 interface IPlayListStore {
   playList: IPlayHymn[];
+  setPlayList: (playList: IPlayHymn[]) => void;
   addPlayList: (playItem: IHymn) => boolean;
   removePlayList: (playItem: IHymn) => void;
   playIndex: number | null;
@@ -18,6 +19,13 @@ const usePlayListStore = create<IPlayListStore>((set) => ({
   playIndex: null,
   isPlaying: false,
   enablePlaySet: new Set<number>(),
+  setPlayList: (playList) => {
+    const enablePlaySet: number[] = [];
+    playList.forEach(({ song, index }) => {
+      if (!!song) enablePlaySet.push(index);
+    });
+    set({ playList, enablePlaySet: new Set(enablePlaySet) });
+  },
   addPlayList: (playItem) => {
     let isDuplicate = false;
 
@@ -39,6 +47,8 @@ const usePlayListStore = create<IPlayListStore>((set) => ({
           if (!!song) enablePlayList.push(index);
         });
 
+        localStorage.setItem("playList", JSON.stringify(updatedPlayList));
+
         return {
           playList: updatedPlayList,
           enablePlaySet: new Set(enablePlayList),
@@ -59,6 +69,7 @@ const usePlayListStore = create<IPlayListStore>((set) => ({
         if (!!song) enablePlayList.push(index);
       });
 
+      localStorage.setItem("playList", JSON.stringify(updatedPlayList));
       return {
         playList: updatedPlayList,
         enablePlaySet: new Set(enablePlayList),
