@@ -24,7 +24,7 @@ const usePlayListStore = create<IPlayListStore>((set) => ({
     playList.forEach(({ song, index }) => {
       if (!!song) enablePlaySet.push(index);
     });
-    set({ playList, enablePlaySet: new Set(enablePlaySet) });
+    set({ playList, enablePlaySet: new Set(enablePlaySet), isPlaying: false });
   },
   addPlayList: (playItem) => {
     let isDuplicate = false;

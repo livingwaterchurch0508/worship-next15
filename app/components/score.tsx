@@ -15,6 +15,7 @@ export default function Score() {
   const { scoreIndex, setScoreIndex } = useScoreItemStore((state) => state);
 
   const [currentPlayItem, setCurrentPlayItem] = useState<IHymn | null>(null);
+  const [isFirst, setIsFirst] = useState(true);
 
   useEffect(() => {
     if (playIndex === null && scoreIndex === null) {
@@ -36,6 +37,10 @@ export default function Score() {
       if (playList.length > 0) {
         setScoreIndex(playList[0].index);
         setPlayIndex(playList[0].index);
+        if (isFirst) {
+          setIsFirst(true);
+          return;
+        }
         setIsPlaying(true);
       }
       return;

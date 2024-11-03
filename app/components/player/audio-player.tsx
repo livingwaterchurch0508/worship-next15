@@ -273,7 +273,9 @@ export default function AudioPlayer({
             ) : (
               <Play
                 className={
-                  playIndex === null ? "" : "text-blue-700 dark:text-blue-300"
+                  playIndex === null || !isPlaying
+                    ? ""
+                    : "text-blue-700 dark:text-blue-300"
                 }
               />
             )}
