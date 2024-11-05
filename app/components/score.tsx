@@ -35,8 +35,17 @@ export default function Score() {
       }
 
       if (playList.length > 0) {
-        setScoreIndex(playList[0].index);
-        setPlayIndex(playList[0].index);
+        const findIndex = playList.findIndex(
+          ({ index }) => index === enableFirstPlayItem,
+        );
+        if (findIndex === -1) {
+          setScoreIndex(playList[0].index);
+        }
+
+        if (findIndex > -1) {
+          setScoreIndex(playList[findIndex].index);
+          setPlayIndex(playList[findIndex].index);
+        }
         if (isFirst) {
           setIsFirst(true);
           return;

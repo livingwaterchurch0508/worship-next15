@@ -5,6 +5,7 @@ import {
   SetStateAction,
 } from "react";
 import { LucideProps } from "lucide-react";
+import type { UniqueIdentifier } from "@dnd-kit/core/dist/types";
 
 import { TMenuType } from "@/app/variables/enums";
 
@@ -28,6 +29,7 @@ export interface IHymn {
 }
 
 export interface IPlayHymn extends IHymn {
+  id: UniqueIdentifier;
   index: number;
 }
 

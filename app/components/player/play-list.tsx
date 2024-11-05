@@ -1,7 +1,17 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { BookOpen, ChevronDown, Pause, Play, X } from "lucide-react";
+import {
+  DndContext,
+  DragEndEvent,
+  KeyboardSensor,
+  MouseSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import { arrayMove, SortableContext } from "@dnd-kit/sortable";
+import { ChevronDown } from "lucide-react";
 
 import {
   Card,
@@ -10,26 +20,17 @@ import {
   CardTitle,
 } from "@/app/components/ui/card";
 import { ScrollArea } from "@/app/components/ui/scroll-area";
-import { Separator } from "@/app/components/ui/separator";
-import { Button } from "@/app/components/ui/button";
 
+import { Button } from "@/app/components/ui/button";
 import { usePlayListStore } from "@/app/stores/play-list-store";
-import { useScoreItemStore } from "@/app/stores/score-item-store";
 import { IPlayList } from "@/app/variables/interfaces";
+import PlayItem from "@/app/components/player/play-item";
 
 export default function PlayList({
   showPlayList,
   setShowPlayListAction,
 }: IPlayList) {
-  const {
-    playList,
-    playIndex,
-    isPlaying,
-    removePlayList,
-    setPlayIndex,
-    setIsPlaying,
-  } = usePlayListStore((state) => state);
-  const { scoreIndex, setScoreIndex } = useScoreItemStore((state) => state);
+  const { playList, setPlayList } = usePlayListStore((state) => state);
   const [isVisible, setIsVisible] = useState(showPlayList);
 
   useEffect(() => {
@@ -44,6 +45,23 @@ export default function PlayList({
   const closePlayList = useCallback(() => {
     setShowPlayListAction(false);
   }, [setShowPlayListAction]);
+
+  const sensors = useSensors(
+    useSensor(TouchSensor),
+    useSensor(MouseSensor),
+    useSensor(KeyboardSensor),
+  );
+
+  const onDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (over === null) return;
+
+    if (active.id !== over.id) {
+      const oldIndex = playList.findIndex(({ id }) => id === active.id);
+      const newIndex = playList.findIndex(({ id }) => id === over.id);
+      setPlayList(arrayMove(playList, oldIndex, newIndex));
+    }
+  };
 
   return isVisible ? (
     <Card
@@ -60,85 +78,13 @@ export default function PlayList({
       <CardContent>
         <ScrollArea className="h-72 w-full rounded-md border p-4">
           <div className="p4">
-            {playList.map((worship, index) => (
-              <div key={index} className="w-full">
-                <div className="flex justify-between">
-                  <span
-                    className={
-                      playIndex === worship.index
-                        ? "text-blue-700 dark:text-blue-300 truncate"
-                        : "truncate"
-                    }
-                  >
-                    {worship.title}
-                  </span>
-                  <div className="flex space-x-1">
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => setScoreIndex(worship.index)}
-                    >
-                      <BookOpen
-                        className={
-                          scoreIndex === worship.index
-                            ? "text-blue-700 dark:text-blue-300"
-                            : ""
-                        }
-                      />
-                    </Button>
-                    {!!worship.song && (
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => {
-                          if (playIndex === worship.index) {
-                            setIsPlaying(!isPlaying);
-                            return;
-                          }
-                          setPlayIndex(worship.index);
-                          setIsPlaying(true);
-                        }}
-                      >
-                        {playIndex === worship.index && isPlaying ? (
-                          <Pause
-                            className={
-                              playIndex === worship.index
-                                ? "text-blue-700 dark:text-blue-300"
-                                : ""
-                            }
-                          />
-                        ) : (
-                          <Play
-                            className={
-                              playIndex === worship.index
-                                ? "text-blue-700 dark:text-blue-300"
-                                : ""
-                            }
-                          />
-                        )}
-                      </Button>
-                    )}
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => {
-                        removePlayList(worship);
-                        if (playIndex === worship.index) {
-                          setPlayIndex(null);
-                          setIsPlaying(false);
-                        }
-                        if (scoreIndex === worship.index) {
-                          setScoreIndex(null);
-                        }
-                      }}
-                    >
-                      <X />
-                    </Button>
-                  </div>
-                </div>
-                <Separator className="my-2" />
-              </div>
-            ))}
+            <DndContext onDragEnd={onDragEnd} sensors={sensors}>
+              <SortableContext items={playList}>
+                {playList.map((worship, index) => (
+                  <PlayItem worship={worship} key={index} />
+                ))}
+              </SortableContext>
+            </DndContext>
           </div>
         </ScrollArea>
       </CardContent>

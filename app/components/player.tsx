@@ -15,7 +15,7 @@ export default function Player() {
     const storedPlayList: IPlayHymn[] = JSON.parse(
       localStorage.getItem("playList") || "[]",
     );
-    setPlayList(storedPlayList);
+    setPlayList(storedPlayList.map((item) => ({ ...item, id: item.index })));
   }, []);
 
   return (

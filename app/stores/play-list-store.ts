@@ -25,26 +25,34 @@ const usePlayListStore = create<IPlayListStore>((set) => ({
       if (!!song) enablePlaySet.push(index);
     });
     set({ playList, enablePlaySet: new Set(enablePlaySet), isPlaying: false });
+    localStorage.setItem("playList", JSON.stringify(playList));
   },
   addPlayList: (playItem) => {
     let isDuplicate = false;
 
     set((state) => {
-      isDuplicate = state.playList.some(
+      const playList = state.playList;
+
+      isDuplicate = playList.some(
         (item: IHymn) => item.title === playItem.title,
       );
       if (!isDuplicate) {
         const lastIndex =
           state.playList.length === 0
             ? 1
-            : state.playList[state.playList.length - 1].index + 1;
+            : Math.max(...playList.map((item) => item.index)) + 1;
         const updatedPlayList = [
-          ...state.playList,
-          { ...playItem, index: lastIndex },
+          ...playList,
+          { ...playItem, index: lastIndex, id: lastIndex },
         ];
         const enablePlayList: number[] = [];
         updatedPlayList.forEach(({ song, index }) => {
-          if (!!song) enablePlayList.push(index);
+          if (!!song) {
+            enablePlayList.push(index);
+            if (state.playIndex === null) {
+              state.playIndex = index;
+            }
+          }
         });
 
         localStorage.setItem("playList", JSON.stringify(updatedPlayList));
