@@ -18,13 +18,16 @@ export interface IActiveItem {
   menuType: TMenuType;
 }
 
-export interface IHymn {
+export interface IWorship {
   src: string;
   title: string;
   isMulti?: number;
   isHomework?: boolean;
   isThisWeek?: boolean;
   song?: string;
+}
+
+export interface IHymn extends IWorship {
   type: TMenuType;
 }
 

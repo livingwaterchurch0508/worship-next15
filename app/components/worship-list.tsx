@@ -34,7 +34,7 @@ export default function WorshipList() {
       ...WORSHIPS.michael,
       ...WORSHIPS.pastor,
       ...WORSHIPS.print,
-    ].filter(({ isHomework }) => isHomework);
+    ].filter(({ isHomework, isThisWeek }) => isHomework || isThisWeek);
 
     if (!search) {
       setWorshipList(
@@ -42,7 +42,7 @@ export default function WorshipList() {
           [
             ...homeworks,
             ...WORSHIPS[activeItem.menuType].filter(
-              ({ isHomework }) => !isHomework,
+              ({ isHomework, isThisWeek }) => !(isHomework || isThisWeek),
             ),
           ],
           SORT_TYPES.NUMBER_ASC,
@@ -56,8 +56,8 @@ export default function WorshipList() {
         [
           ...homeworks,
           ...WORSHIPS[activeItem.menuType].filter(
-            ({ title, isHomework }) =>
-              !isHomework && includeByCho(search, title),
+            ({ title, isHomework, isThisWeek }) =>
+              !(isHomework || isThisWeek) && includeByCho(search, title),
           ),
         ],
         SORT_TYPES.NUMBER_ASC,

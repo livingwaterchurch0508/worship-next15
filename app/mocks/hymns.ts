@@ -1,6 +1,6 @@
-import { IHymn } from "@/app/variables/interfaces";
+import { IHymn, IWorship } from "@/app/variables/interfaces";
 
-const hymnsMock = [
+const hymnsMock: IWorship[] = [
   {
     src: "기도반주.jpg",
     title: "0.기도반주",

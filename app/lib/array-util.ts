@@ -4,10 +4,11 @@ import { SORT_TYPES, TSortType } from "@/app/variables/enums";
 export function homeworkSort(array: IHymn[]) {
   return array.sort(
     (
-      { isHomework: aIsHomework = false },
-      { isHomework: bIsHomework = false },
+      { isHomework: aIsHomework = false, isThisWeek: aIsThisWeek = false },
+      { isHomework: bIsHomework = false, isThisWeek: bIsThisWeek = false },
     ) => {
       if (aIsHomework > bIsHomework) return -1;
+      if (!aIsHomework && !bIsHomework && aIsThisWeek > bIsThisWeek) return -1;
 
       return 0;
     },
