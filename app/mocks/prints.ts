@@ -46,7 +46,6 @@ const printsMock = [
     src: "프린트_016.jpg",
     title: "16.주님앞에무릎꿇고",
     song: "주님앞에무릎꿇고.m4a",
-    isThisWeek: true,
   },
   { src: "프린트_017.jpg", title: "17.주안에우린하나(기대)" },
   { src: "프린트_018.jpg", title: "18.주의은혜라", isMulti: 2 },
@@ -89,7 +88,6 @@ const printsMock = [
     src: "프린트_033.jpg",
     title: "33.나는믿노라",
     song: "나는믿노라.m4a",
-    isThisWeek: true,
   },
   { src: "프린트_034.jpg", title: "34.은혜" },
   { src: "프린트_035.jpg", title: "35.내삶을주께드리며" },
@@ -111,6 +109,7 @@ const printsMock = [
     src: "프린트_045.jpg",
     title: "45.주님나를부르시니(물위를걷는자)",
     song: "주님나를부르시니.m4a",
+    isThisWeek: true,
   },
   {
     src: "프린트_046.jpg",

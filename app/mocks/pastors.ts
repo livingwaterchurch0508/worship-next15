@@ -86,12 +86,10 @@ const pastorsMock = [
     src: "프린트_002.jpg",
     title: "29.나는가네",
     song: "나는가네.m4a",
-    isThisWeek: true,
   },
   {
     src: "프린트_003.jpg",
     title: "30.이세상이세상",
-    isThisWeek: true,
     song: "이세상이세상.m4a",
   },
   { src: "프린트_004.jpg", title: "31.밤마다주님앞에" },
