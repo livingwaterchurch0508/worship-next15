@@ -8,10 +8,12 @@ import Player from "@/app/components/player";
 import FullScreenButton from "@/app/components/full-screen-button";
 import Score from "@/app/components/score";
 import Help from "@/app/components/help";
+import PreventBackNavigation from "@/app/components/prevent-back-navigation";
 
 export default function Home() {
   return (
     <>
+      <PreventBackNavigation />
       <ResizablePanelGroup
         direction="horizontal"
         className="max-w rounded-lg border"
