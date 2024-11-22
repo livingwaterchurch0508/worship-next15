@@ -53,7 +53,9 @@ export default function AudioPlayer({
     if (enablePlayArray.length === 1) {
       if (audioRef.current) {
         audioRef.current.currentTime = 0;
-        audioRef.current.play();
+        audioRef.current
+          ?.play()
+          .catch((err) => console.log("Playback err", err));
         setIsPlaying(true);
         return;
       }
@@ -75,7 +77,7 @@ export default function AudioPlayer({
     if (isPlaying) {
       audioRef.current?.pause();
     } else {
-      audioRef.current?.play();
+      audioRef.current?.play().catch((err) => console.log("Playback err", err));
     }
 
     setIsPlaying(!isPlaying);
@@ -92,7 +94,9 @@ export default function AudioPlayer({
     if (enablePlayArray.length === 1) {
       if (audioRef.current) {
         audioRef.current.currentTime = 0;
-        audioRef.current?.play();
+        audioRef.current
+          ?.play()
+          .catch((err) => console.log("Playback err", err));
         setIsPlaying(true);
         return;
       }
@@ -152,27 +156,28 @@ export default function AudioPlayer({
   const handleMouseUp = () => {
     setIsDragging(false);
     if (!isPlaying && playIndex !== null) {
-      audioRef.current?.play();
+      audioRef.current?.play().catch((err) => console.log("Playback err", err));
       setIsPlaying(true);
     }
   };
 
   /** 재생 종료시 */
-  const handleAudioEnded = () => {
+  const handleAudioEnded = useCallback(() => {
     handleNextPlay();
-  };
+  }, [handleNextPlay]);
 
   useEffect(() => {
     const audio = audioRef.current;
-    if (audio) {
-      audio.addEventListener("timeupdate", handleTimeUpdate);
-      audio.addEventListener("ended", handleAudioEnded);
-    }
+    if (!audio) return;
+
+    audio.addEventListener("timeupdate", handleTimeUpdate);
+    audio.addEventListener("ended", handleAudioEnded);
+
     return () => {
       audio?.removeEventListener("timeupdate", handleTimeUpdate);
       audio?.removeEventListener("ended", handleAudioEnded);
     };
-  }, [playIndex, enablePlaySet]);
+  }, [playIndex, enablePlaySet, handleAudioEnded]);
 
   const audioPlay = (worship: IPlayHymn) => {
     if ("mediaSession" in navigator) {
@@ -186,13 +191,15 @@ export default function AudioPlayer({
       });
 
       navigator.mediaSession.setActionHandler("play", () => {
-        audioRef.current?.play();
+        audioRef.current
+          ?.play()
+          .catch((err) => console.log("Playback err", err));
       });
       navigator.mediaSession.setActionHandler("pause", () => {
         audioRef.current?.pause();
       });
-      audioRef.current?.play();
     }
+    audioRef.current?.play().catch((err) => console.log("Playback err", err));
   };
 
   useEffect(() => {
@@ -224,7 +231,7 @@ export default function AudioPlayer({
         }
         audio.pause();
         audio.src = playList[findIndex].song
-          ? `/songs/${playList[findIndex].song}`
+          ? decodeURIComponent(`/songs/${playList[findIndex].song}`)
           : "";
 
         if (isPlaying) {
