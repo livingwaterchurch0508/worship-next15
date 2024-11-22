@@ -16,6 +16,7 @@ import NavSearchBar from "@/app/components/nav/nav-search-bar";
 import NavHomework from "@/app/components/nav/nav-homework";
 import NavInfo from "@/app/components/nav/nav-info";
 import { Toaster } from "@/app/components/ui/toaster";
+import UpdateMetadata from "@/app/components/update-metadata";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -59,6 +60,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <UpdateMetadata />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
