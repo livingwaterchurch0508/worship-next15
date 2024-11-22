@@ -17,7 +17,8 @@ import { Label } from "@/app/components/ui/label";
 
 import { usePlayListStore } from "@/app/stores/play-list-store";
 import { useScoreItemStore } from "@/app/stores/score-item-store";
-import { IPlayList } from "@/app/variables/interfaces";
+import { MENU_TITLES } from "@/app/variables/enums";
+import { IPlayHymn, IPlayList } from "@/app/variables/interfaces";
 
 export default function AudioPlayer({
   showPlayList,
@@ -52,7 +53,7 @@ export default function AudioPlayer({
     if (enablePlayArray.length === 1) {
       if (audioRef.current) {
         audioRef.current.currentTime = 0;
-        audioRef.current?.play();
+        audioRef.current.play();
         setIsPlaying(true);
         return;
       }
@@ -173,6 +174,27 @@ export default function AudioPlayer({
     };
   }, [playIndex, enablePlaySet]);
 
+  const audioPlay = (worship: IPlayHymn) => {
+    if ("mediaSession" in navigator) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: worship.title,
+        artist: "김이진 목사님",
+        album: MENU_TITLES[worship.type],
+        artwork: [
+          { src: "/carousel/cross.jpg", sizes: "160x160", type: "image/jpeg" },
+        ],
+      });
+
+      navigator.mediaSession.setActionHandler("play", () => {
+        audioRef.current?.play();
+      });
+      navigator.mediaSession.setActionHandler("pause", () => {
+        audioRef.current?.pause();
+      });
+      audioRef.current?.play();
+    }
+  };
+
   useEffect(() => {
     const audio = audioRef.current;
 
@@ -193,7 +215,7 @@ export default function AudioPlayer({
           );
           if (playList[findIndex].song === audioSrcPath) {
             if (isPlaying) {
-              audio.play();
+              audioPlay(playList[findIndex]);
               return;
             }
             audio.pause();
@@ -206,7 +228,7 @@ export default function AudioPlayer({
           : "";
 
         if (isPlaying) {
-          audio.play();
+          audioPlay(playList[findIndex]);
         }
       }
     }
@@ -228,7 +250,7 @@ export default function AudioPlayer({
 
   return (
     <Card>
-      <audio ref={audioRef} className="hidden" />
+      <audio ref={audioRef} className="hidden" controls />
       <div className="flex w-full">
         <div className="pl-2 pr-2">
           <Button variant="ghost" size="icon" onClick={handleShowPlayList}>
