@@ -73,11 +73,17 @@ export default function AudioPlayer({
   /** 재생하기 / 멈추기 */
   const handlePlay = () => {
     if (playIndex === null) return;
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (audio.currentTime >= audio.duration) {
+      audio.currentTime = 0;
+    }
 
     if (isPlaying) {
-      audioRef.current?.pause();
+      audio.pause();
     } else {
-      audioRef.current?.play().catch((err) => console.log("Playback err", err));
+      audio.play().catch((err) => console.log("Playback err", err));
     }
 
     setIsPlaying(!isPlaying);
@@ -132,6 +138,11 @@ export default function AudioPlayer({
     const rect = progressBar.getBoundingClientRect();
     const clickPositionX = clientX - rect.left;
     const clickRatio = Math.max(0, Math.min(clickPositionX / rect.width, 1));
+
+    if (!isFinite(audio.duration) || clickRatio < 0 || clickRatio > 1) {
+      console.warn("Invalid audio duration or click ratio");
+      return;
+    }
 
     audio.currentTime = audio.duration * clickRatio;
     setProgress(clickRatio * 100);
