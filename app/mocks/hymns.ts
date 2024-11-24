@@ -750,7 +750,13 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_368.jpg",
     title: "368.주예수여은혜를내려주사",
   },
-  { src: "새찬송가반주용(A4사이즈)_369.jpg", title: "369.죄짐맡은우리구주" },
+  {
+    src: "새찬송가반주용(A4사이즈)_369.jpg",
+    title: "369.죄짐맡은우리구주",
+    song: "죄짐맡은우리구주.m4a",
+    isThisWeek: true,
+    isHomework: true,
+  },
   { src: "새찬송가반주용(A4사이즈)_370.jpg", title: "370.주안에있는나에게" },
   { src: "새찬송가반주용(A4사이즈)_371.jpg", title: "371.구주여광풍이불어" },
   {
@@ -774,7 +780,12 @@ const hymnsMock: IWorship[] = [
     title: "381.나캄캄한밤죄의길에",
   },
   { src: "새찬송가반주용(A4사이즈)_382.jpg", title: "382.너근심걱정말아라" },
-  { src: "새찬송가반주용(A4사이즈)_383.jpg", title: "383.눈을들어산을보니" },
+  {
+    src: "새찬송가반주용(A4사이즈)_383.jpg",
+    title: "383.눈을들어산을보니",
+    song: "눈을들어산을보니.m4a",
+    isThisWeek: true,
+  },
   { src: "새찬송가반주용(A4사이즈)_384.jpg", title: "384.나의갈길다가도록" },
   { src: "새찬송가반주용(A4사이즈)_385.jpg", title: "385.못박혀죽으신" },
   { src: "새찬송가반주용(A4사이즈)_386.jpg", title: "386.만세반석열린곳에" },
@@ -1029,6 +1040,7 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_491.jpg",
     title: "491.저높은곳을향하여",
     song: "저높은곳을향하여.m4a",
+    isThisWeek: true,
   },
   {
     src: "새찬송가반주용(A4사이즈)_492.jpg",
@@ -1072,7 +1084,6 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_508.jpg",
     title: "508.우리가지금은나그네되어도",
     song: "우리가지금은나그네되어도.m4a",
-    isThisWeek: true,
   },
   {
     src: "새찬송가반주용(A4사이즈)_509.jpg",
@@ -1242,7 +1253,6 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_588.jpg",
     title: "588.공중나는새를보라",
     song: "공중나는새.m4a",
-    isThisWeek: true,
   },
   { src: "새찬송가반주용(A4사이즈)_589.jpg", title: "589.넓은들에익은곡식" },
   { src: "새찬송가반주용(A4사이즈)_590.jpg", title: "590.논밭에오곡백과" },
