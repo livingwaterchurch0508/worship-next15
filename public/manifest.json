@@ -1,0 +1,16 @@
+{
+  "name": "생수가 흐르는 교회💒 찬양집",
+  "short_name": "💒찬양집",
+  "description": "생수가 흐르는 교회에 오신걸 환영합니다!",
+  "icons": [
+    {
+      "src": "/carousel/cross.jpg",
+      "sizes": "160x160",
+      "type": "image/jpeg"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000"
+}

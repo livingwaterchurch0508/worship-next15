@@ -32,9 +32,11 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "생수가 흐르는 교회💒 찬양집",
   description: "생수가 흐르는 교회에 오신걸 환영합니다!",
+  manifest: "/manifest.json",
   openGraph: {
     title: "생수가 흐르는 교회💒",
     description: "생수가 흐르는 교회에 오신걸 환영합니다!",
+    siteName: "생수가 흐르는 교회💒 찬양집",
     images: [
       {
         url: "https://livingwater-church.co.kr/home_banner.png",
@@ -57,6 +59,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <title>생수가 흐르는 교회💒 찬양집</title>
+        <meta
+          name="description"
+          content="생수가 흐르는 교회에 오신걸 환영합니다!"
+        />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/carousel/cross.jpg" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
