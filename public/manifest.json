@@ -5,7 +5,12 @@
   "icons": [
     {
       "src": "/carousel/cross.jpg",
-      "sizes": "160x160",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "/carousel/cross.jpg",
+      "sizes": "512x512",
       "type": "image/jpeg"
     }
   ],
