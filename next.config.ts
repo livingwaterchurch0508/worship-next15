@@ -8,7 +8,6 @@ const nextConfig = withPWA({
   disable: process.env.NODE_ENV !== "production", // 개발 환경에서 PWA 비활성화
 })({
   reactStrictMode: true,
-  swcMinify: true,
 }) as NextConfig;
 
 export default nextConfig;
