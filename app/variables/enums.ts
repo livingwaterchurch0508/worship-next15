@@ -8,8 +8,8 @@ import { michaels } from "@/app/mocks/michaels";
 const MENU_TYPES = {
   HYMN: "hymn",
   PRINT: "print",
-  PASTOR: "pastor",
   MICHAEL: "michael",
+  PASTOR: "pastor",
 } as const;
 
 export type TMenuType = (typeof MENU_TYPES)[keyof typeof MENU_TYPES];
@@ -17,22 +17,22 @@ export type TMenuType = (typeof MENU_TYPES)[keyof typeof MENU_TYPES];
 const MENU_TITLES = {
   [MENU_TYPES.HYMN]: "찬송가",
   [MENU_TYPES.PRINT]: "프린트",
-  [MENU_TYPES.PASTOR]: "목사님찬양",
   [MENU_TYPES.MICHAEL]: "복음성가",
+  [MENU_TYPES.PASTOR]: "목사님찬양",
 } as const;
 
 const MENU_ICONS = {
   [MENU_TYPES.HYMN]: Book,
   [MENU_TYPES.PRINT]: Printer,
-  [MENU_TYPES.PASTOR]: Music,
   [MENU_TYPES.MICHAEL]: Inbox,
+  [MENU_TYPES.PASTOR]: Music,
 } as const;
 
 const WORSHIPS = {
   [MENU_TYPES.HYMN]: hymns,
   [MENU_TYPES.PRINT]: prints,
-  [MENU_TYPES.PASTOR]: pastors,
   [MENU_TYPES.MICHAEL]: michaels,
+  [MENU_TYPES.PASTOR]: pastors,
 } as const;
 
 const SORT_TYPES = {
