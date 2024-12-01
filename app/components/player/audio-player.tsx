@@ -99,7 +99,7 @@ export default function AudioPlayer({
 
     if (enablePlayArray.length === 1) {
       if (audioRef.current) {
-        audioRef.current.currentTime = 0;
+        // audioRef.current.currentTime = 0;
         audioRef.current
           ?.play()
           .catch((err) => console.log("Playback err", err));
@@ -200,15 +200,6 @@ export default function AudioPlayer({
           { src: "/carousel/cross.jpg", sizes: "160x160", type: "image/jpeg" },
         ],
       });
-
-      navigator.mediaSession.setActionHandler("play", () => {
-        audioRef.current
-          ?.play()
-          .catch((err) => console.log("Playback err", err));
-      });
-      navigator.mediaSession.setActionHandler("pause", () => {
-        audioRef.current?.pause();
-      });
     }
     audioRef.current?.play().catch((err) => console.log("Playback err", err));
   };
@@ -268,7 +259,7 @@ export default function AudioPlayer({
 
   return (
     <Card>
-      <audio ref={audioRef} className="hidden" controls />
+      <audio ref={audioRef} controls preload="auto" hidden />
       <div className="flex w-full">
         <div className="pl-2 pr-2">
           <Button variant="ghost" size="icon" onClick={handleShowPlayList}>
