@@ -18,7 +18,7 @@ import { Label } from "@/app/components/ui/label";
 import { usePlayListStore } from "@/app/stores/play-list-store";
 import { useScoreItemStore } from "@/app/stores/score-item-store";
 import { MENU_TITLES } from "@/app/variables/enums";
-import { IPlayHymn, IPlayList } from "@/app/variables/interfaces";
+import { IPlayList } from "@/app/variables/interfaces";
 
 export default function AudioPlayer({
   showPlayList,
@@ -53,9 +53,8 @@ export default function AudioPlayer({
     if (enablePlayArray.length === 1) {
       if (audioRef.current) {
         audioRef.current.currentTime = 0;
-        audioRef.current
-          ?.play()
-          .catch((err) => console.log("Playback err", err));
+        audioRef.current?.play();
+        audioRef.current.play();
         setIsPlaying(true);
         return;
       }
@@ -73,20 +72,16 @@ export default function AudioPlayer({
   /** 재생하기 / 멈추기 */
   const handlePlay = () => {
     if (playIndex === null) return;
-    const audio = audioRef.current;
-    if (!audio) return;
 
-    if (audio.currentTime >= audio.duration) {
-      audio.currentTime = 0;
-    }
+    audioRef.current?.play();
+    setIsPlaying(true);
+  };
 
-    if (isPlaying) {
-      audio.pause();
-    } else {
-      audio.play().catch((err) => console.log("Playback err", err));
-    }
+  const handlePause = () => {
+    if (playIndex === null) return;
 
-    setIsPlaying(!isPlaying);
+    audioRef.current?.pause();
+    setIsPlaying(false);
   };
 
   /** 다음 곡 재생하기 */
@@ -99,10 +94,8 @@ export default function AudioPlayer({
 
     if (enablePlayArray.length === 1) {
       if (audioRef.current) {
-        // audioRef.current.currentTime = 0;
-        audioRef.current
-          ?.play()
-          .catch((err) => console.log("Playback err", err));
+        audioRef.current.currentTime = 0;
+        audioRef.current?.play();
         setIsPlaying(true);
         return;
       }
@@ -139,11 +132,6 @@ export default function AudioPlayer({
     const clickPositionX = clientX - rect.left;
     const clickRatio = Math.max(0, Math.min(clickPositionX / rect.width, 1));
 
-    if (!isFinite(audio.duration) || clickRatio < 0 || clickRatio > 1) {
-      console.warn("Invalid audio duration or click ratio");
-      return;
-    }
-
     audio.currentTime = audio.duration * clickRatio;
     setProgress(clickRatio * 100);
   };
@@ -167,30 +155,30 @@ export default function AudioPlayer({
   const handleMouseUp = () => {
     setIsDragging(false);
     if (!isPlaying && playIndex !== null) {
-      audioRef.current?.play().catch((err) => console.log("Playback err", err));
+      audioRef.current?.play();
       setIsPlaying(true);
     }
   };
 
   /** 재생 종료시 */
-  const handleAudioEnded = useCallback(() => {
+  const handleAudioEnded = () => {
     handleNextPlay();
-  }, [handleNextPlay]);
+  };
 
   useEffect(() => {
     const audio = audioRef.current;
-    if (!audio) return;
-
-    audio.addEventListener("timeupdate", handleTimeUpdate);
-    audio.addEventListener("ended", handleAudioEnded);
-
+    if (audio) {
+      audio.addEventListener("timeupdate", handleTimeUpdate);
+      audio.addEventListener("ended", handleAudioEnded);
+    }
     return () => {
       audio?.removeEventListener("timeupdate", handleTimeUpdate);
       audio?.removeEventListener("ended", handleAudioEnded);
     };
-  }, [playIndex, enablePlaySet, handleAudioEnded]);
+  }, [playIndex, enablePlaySet]);
 
-  const audioPlay = (worship: IPlayHymn) => {
+  const audioPlay = (findIndex: number) => {
+    const worship = playList[findIndex];
     if ("mediaSession" in navigator) {
       navigator.mediaSession.metadata = new MediaMetadata({
         title: worship.title,
@@ -200,8 +188,13 @@ export default function AudioPlayer({
           { src: "/carousel/cross.jpg", sizes: "160x160", type: "image/jpeg" },
         ],
       });
+
+      navigator.mediaSession.setActionHandler("play", handlePlay);
+      navigator.mediaSession.setActionHandler("pause", handlePause);
+      navigator.mediaSession.setActionHandler("nexttrack", handleNextPlay);
+      navigator.mediaSession.setActionHandler("previoustrack", handleNextPlay);
+      audioRef.current?.play();
     }
-    audioRef.current?.play().catch((err) => console.log("Playback err", err));
   };
 
   useEffect(() => {
@@ -224,7 +217,7 @@ export default function AudioPlayer({
           );
           if (playList[findIndex].song === audioSrcPath) {
             if (isPlaying) {
-              audioPlay(playList[findIndex]);
+              audioPlay(findIndex);
               return;
             }
             audio.pause();
@@ -233,11 +226,11 @@ export default function AudioPlayer({
         }
         audio.pause();
         audio.src = playList[findIndex].song
-          ? decodeURIComponent(`/songs/${playList[findIndex].song}`)
+          ? `/songs/${playList[findIndex].song}`
           : "";
 
         if (isPlaying) {
-          audioPlay(playList[findIndex]);
+          audioPlay(findIndex);
         }
       }
     }
@@ -259,7 +252,8 @@ export default function AudioPlayer({
 
   return (
     <Card>
-      <audio ref={audioRef} controls preload="auto" hidden />
+      <audio ref={audioRef} className="hidden" />
+      <audio ref={audioRef} className="hidden" controls />
       <div className="flex w-full">
         <div className="pl-2 pr-2">
           <Button variant="ghost" size="icon" onClick={handleShowPlayList}>
@@ -294,7 +288,11 @@ export default function AudioPlayer({
           <Button variant="ghost" size="icon" onClick={handlePrevPlay}>
             <StepBack />
           </Button>
-          <Button variant="ghost" size="icon" onClick={handlePlay}>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={isPlaying ? handlePause : handlePlay}
+          >
             {isPlaying ? (
               <Pause
                 className={
