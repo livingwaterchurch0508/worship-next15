@@ -40,12 +40,12 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_19.jpg",
     title: "19.찬송하는소리있어",
     song: "찬송하는소리있어.m4a",
+    isThisWeek: true,
   },
   {
     src: "새찬송가반주용(A4사이즈)_20.jpg",
     title: "20.큰영광중에계신주",
     song: "큰영광중에계신주.m4a",
-    isThisWeek: true,
   },
   {
     src: "새찬송가반주용(A4사이즈)_21.jpg",
@@ -540,7 +540,12 @@ const hymnsMock: IWorship[] = [
   { src: "새찬송가반주용(A4사이즈)_276.jpg", title: "276.아버지여이죄인을" },
   { src: "새찬송가반주용(A4사이즈)_277.jpg", title: "277.양떼를떠나서" },
   { src: "새찬송가반주용(A4사이즈)_278.jpg", title: "278.여러해동안주떠나" },
-  { src: "새찬송가반주용(A4사이즈)_279.jpg", title: "279.인애하신구세주여" },
+  {
+    src: "새찬송가반주용(A4사이즈)_279.jpg",
+    title: "279.인애하신구세주여",
+    song: "인애하신구세주여.m4a",
+    isThisWeek: true,
+  },
   { src: "새찬송가반주용(A4사이즈)_280.jpg", title: "280.천부여의지없어서" },
   { src: "새찬송가반주용(A4사이즈)_281.jpg", title: "281.요나처럼순종않고" },
   { src: "새찬송가반주용(A4사이즈)_282.jpg", title: "282.큰죄에빠진날위해" },
@@ -578,8 +583,6 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_292.jpg",
     title: "292.주없이살수없네",
     song: "주업이살수업네.m4a",
-    isThisWeek: true,
-    isHomework: true,
   },
   {
     src: "새찬송가반주용(A4사이즈)_293.jpg",
@@ -700,7 +703,6 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_345.jpg",
     title: "345.캄캄한밤사나운바람불때",
     song: "캄캄한밤사나운바람불때.m4a",
-    isThisWeek: true,
   },
   { src: "새찬송가반주용(A4사이즈)_346.jpg", title: "346.주예수우리구하려" },
   { src: "새찬송가반주용(A4사이즈)_347.jpg", title: "347.허락하신새땅에" },
@@ -808,7 +810,6 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_393.jpg",
     title: "393.오신실하신주",
     song: "오신실하신주.m4a",
-    isThisWeek: true,
   },
   { src: "새찬송가반주용(A4사이즈)_394.jpg", title: "394.이세상의친구들" },
   {
@@ -916,6 +917,7 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_438.jpg",
     title: "438.내영혼이은총입어",
     song: "내영혼이은총입어.m4a",
+    isThisWeek: true,
   },
   { src: "새찬송가반주용(A4사이즈)_439.jpg", title: "439.십자가로가까이" },
   {
@@ -960,6 +962,8 @@ const hymnsMock: IWorship[] = [
   {
     src: "새찬송가반주용(A4사이즈)_455.jpg",
     title: "455.주님의마음을본받는자",
+    song: "주님의마음을본받는자.m4a",
+    isThisWeek: true,
   },
   {
     src: "새찬송가반주용(A4사이즈)_456.jpg",
