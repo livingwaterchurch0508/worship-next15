@@ -272,8 +272,6 @@ const michaelMock: IWorship[] = [
     title: "963.달리다굼(캄캄한인생길)",
     isMulti: 2,
     song: "달리다굼.m4a",
-    isThisWeek: true,
-    isHomework: true,
   },
   {
     src: "달리다굼-1.jpg",
@@ -283,7 +281,11 @@ const michaelMock: IWorship[] = [
     src: "예수님품으로(인생길험하고).jpg",
     title: "886.예수님품으로(인생길험하고)",
     song: "예수님품으로.m4a",
-    isThisWeek: true,
+  },
+  {
+    src: "주를사랑하는가.jpg",
+    title: "1082.주를사랑하는가",
+    song: "주를사랑하는가.m4a",
   },
 ];
 
