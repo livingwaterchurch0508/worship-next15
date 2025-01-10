@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import "react-photo-view/dist/react-photo-view.css";
 
 import { ThemeProvider } from "@/app/components/theme-provider";
 import { AppSidebar } from "@/app/components/app-sidebar";

@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   BookOpen,
+  LucideRecycle,
   Pause,
   Play,
   Rows4,
@@ -17,7 +18,7 @@ import { Label } from "@/app/components/ui/label";
 
 import { usePlayListStore } from "@/app/stores/play-list-store";
 import { useScoreItemStore } from "@/app/stores/score-item-store";
-import { MENU_TITLES } from "@/app/variables/enums";
+import { MENU_TITLES, SCORE_MODE } from "@/app/variables/enums";
 import { IPlayList } from "@/app/variables/interfaces";
 
 export default function AudioPlayer({
@@ -32,7 +33,8 @@ export default function AudioPlayer({
     setIsPlaying,
     enablePlaySet,
   } = usePlayListStore((state) => state);
-  const { scoreIndex, setScoreIndex } = useScoreItemStore((state) => state);
+  const { scoreIndex, setScoreIndex, scoreMode, setScoreMode } =
+    useScoreItemStore((state) => state);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const progressBarRef = useRef<HTMLDivElement | null>(null);
   const [progress, setProgress] = useState(0);
@@ -86,10 +88,14 @@ export default function AudioPlayer({
 
   /** 다음 곡 재생하기 */
   const handleNextPlay = () => {
-    if (playIndex === null) return;
-
     // enablePlaySet을 배열로 변환하여 인덱스 찾기
     const enablePlayArray = Array.from(enablePlaySet);
+
+    if (playIndex === null) {
+      setPlayIndex(enablePlayArray[0]);
+      return;
+    }
+
     const currentIndex = enablePlayArray.indexOf(playIndex);
 
     if (enablePlayArray.length === 1) {
@@ -197,6 +203,14 @@ export default function AudioPlayer({
     }
   };
 
+  const handleScore = () => {
+    if (playIndex === null) return;
+    if (playIndex === scoreIndex) {
+      setScoreMode(scoreMode === SCORE_MODE.M ? SCORE_MODE.A : SCORE_MODE.M);
+    }
+    setScoreIndex(playIndex);
+  };
+
   useEffect(() => {
     const audio = audioRef.current;
 
@@ -271,20 +285,27 @@ export default function AudioPlayer({
                   .title}
           </Label>
         </div>
-        <div className="min-w-[160px]">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => playIndex !== null && setScoreIndex(playIndex)}
-          >
-            <BookOpen
-              className={
-                scoreIndex !== null && scoreIndex === playIndex
-                  ? "text-blue-700 dark:text-blue-300"
-                  : ""
-              }
-            />
-          </Button>
+        <div className="min-w-[160px] flex items-center space-x-2">
+          <div className="relative">
+            <Button variant="ghost" size="icon" onClick={handleScore}>
+              <BookOpen
+                className={
+                  scoreIndex !== null && scoreIndex === playIndex
+                    ? "text-blue-700 dark:text-blue-300"
+                    : ""
+                }
+              />
+            </Button>
+            {scoreMode === SCORE_MODE.A ? (
+              <LucideRecycle
+                className={
+                  scoreIndex !== null && scoreIndex === playIndex
+                    ? "text-blue-700 dark:text-blue-300 w-[12px] absolute right-1 top-0"
+                    : "w-[12px] absolute right-1 top-0"
+                }
+              />
+            ) : null}
+          </div>
           <Button variant="ghost" size="icon" onClick={handlePrevPlay}>
             <StepBack />
           </Button>

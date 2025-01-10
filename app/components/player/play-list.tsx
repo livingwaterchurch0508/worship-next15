@@ -20,11 +20,11 @@ import {
   CardTitle,
 } from "@/app/components/ui/card";
 import { ScrollArea } from "@/app/components/ui/scroll-area";
+import PlayItem from "@/app/components/player/play-item";
 
 import { Button } from "@/app/components/ui/button";
 import { usePlayListStore } from "@/app/stores/play-list-store";
 import { IPlayList } from "@/app/variables/interfaces";
-import PlayItem from "@/app/components/player/play-item";
 
 export default function PlayList({
   showPlayList,
@@ -77,15 +77,13 @@ export default function PlayList({
       </CardHeader>
       <CardContent>
         <ScrollArea className="h-72 w-full rounded-md border p-4">
-          <div className="p4">
-            <DndContext onDragEnd={onDragEnd} sensors={sensors}>
-              <SortableContext items={playList}>
-                {playList.map((worship, index) => (
-                  <PlayItem worship={worship} key={index} />
-                ))}
-              </SortableContext>
-            </DndContext>
-          </div>
+          <DndContext onDragEnd={onDragEnd} sensors={sensors}>
+            <SortableContext items={playList}>
+              {playList.map((worship, index) => (
+                <PlayItem worship={worship} key={index} />
+              ))}
+            </SortableContext>
+          </DndContext>
         </ScrollArea>
       </CardContent>
     </Card>

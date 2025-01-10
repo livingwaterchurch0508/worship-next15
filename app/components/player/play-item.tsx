@@ -1,10 +1,15 @@
-import { Button } from "@/app/components/ui/button";
+"use client";
+
+import { useSortable } from "@dnd-kit/sortable";
 import { BookOpen, GripVertical, Pause, Play, X } from "lucide-react";
+
+import { Button } from "@/app/components/ui/button";
 import { Separator } from "@/app/components/ui/separator";
-import { IPlayHymn } from "@/app/variables/interfaces";
+
 import { useScoreItemStore } from "@/app/stores/score-item-store";
 import { usePlayListStore } from "@/app/stores/play-list-store";
-import { useSortable } from "@dnd-kit/sortable";
+import { SCORE_MODE } from "@/app/variables/enums";
+import { IPlayHymn } from "@/app/variables/interfaces";
 
 interface IPlayItem {
   worship: IPlayHymn;
@@ -13,7 +18,9 @@ interface IPlayItem {
 export default function PlayItem({ worship }: IPlayItem) {
   const { playIndex, isPlaying, removePlayList, setPlayIndex, setIsPlaying } =
     usePlayListStore((state) => state);
-  const { scoreIndex, setScoreIndex } = useScoreItemStore((state) => state);
+  const { scoreIndex, setScoreIndex, setScoreMode } = useScoreItemStore(
+    (state) => state,
+  );
 
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: worship.index });
@@ -25,29 +32,30 @@ export default function PlayItem({ worship }: IPlayItem) {
     transition,
   };
 
+  const setScore = () => {
+    setScoreMode(SCORE_MODE.M);
+    setScoreIndex(worship.index);
+  };
+
   return (
-    <div ref={setNodeRef} className="w-full" style={style} {...attributes}>
+    <div ref={setNodeRef} className="w-full " style={style} {...attributes}>
       <div className="flex justify-between">
-        <div className="flex items-center space-x-2 truncate">
+        <div className="flex items-center space-x-2 overflow-hidden">
           <Button variant="ghost" size="icon" {...listeners}>
             <GripVertical />
           </Button>
           <span
-            className={
+            className={`truncate ${
               playIndex === worship.index
-                ? "text-blue-700 dark:text-blue-300 truncate"
-                : "truncate"
-            }
+                ? "text-blue-700 dark:text-blue-300"
+                : ""
+            }`}
           >
             {worship.title}
           </span>
         </div>
         <div className="flex space-x-1">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setScoreIndex(worship.index)}
-          >
+          <Button variant="ghost" size="icon" onClick={setScore}>
             <BookOpen
               className={
                 scoreIndex === worship.index

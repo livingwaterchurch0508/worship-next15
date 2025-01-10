@@ -44,4 +44,18 @@ const SORT_TYPES = {
 
 export type TSortType = (typeof SORT_TYPES)[keyof typeof SORT_TYPES];
 
-export { MENU_TYPES, MENU_TITLES, MENU_ICONS, WORSHIPS, SORT_TYPES };
+const SCORE_MODE = {
+  M: "MANUAL",
+  A: "AUTO",
+} as const;
+
+export type TScoreMode = (typeof SCORE_MODE)[keyof typeof SCORE_MODE];
+
+export {
+  MENU_TYPES,
+  MENU_TITLES,
+  MENU_ICONS,
+  WORSHIPS,
+  SORT_TYPES,
+  SCORE_MODE,
+};
