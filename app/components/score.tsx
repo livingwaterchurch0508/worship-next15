@@ -95,7 +95,7 @@ export default function Score() {
       style={{ height: "calc(100dvh - 170px)" }}
     >
       {currentPlayItem !== null && currentPlayItem ? (
-        <PhotoProvider>
+        <PhotoProvider key={currentPlayItem?.isMulti || 1}>
           {Array.from({ length: currentPlayItem?.isMulti || 1 }).map((_, i) => (
             <AspectRatio ratio={1 / 1.414} className="bg-muted" key={i}>
               <PhotoView src={setScorePath(currentPlayItem, i)}>
