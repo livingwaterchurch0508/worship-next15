@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import {
+  closestCenter,
   DndContext,
   DragEndEvent,
   KeyboardSensor,
@@ -76,8 +77,12 @@ export default function PlayList({
         </div>
       </CardHeader>
       <CardContent>
-        <ScrollArea className="h-72 w-full rounded-md border p-4">
-          <DndContext onDragEnd={onDragEnd} sensors={sensors}>
+        <ScrollArea className="h-72 w-full rounded-md border p-4 dnd-context">
+          <DndContext
+            onDragEnd={onDragEnd}
+            sensors={sensors}
+            collisionDetection={closestCenter}
+          >
             <SortableContext items={playList}>
               {playList.map((worship, index) => (
                 <PlayItem worship={worship} key={index} />

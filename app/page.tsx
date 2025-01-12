@@ -20,7 +20,7 @@ export default function Home() {
       >
         <WorshipList />
         <ResizableHandle withHandle />
-        <ResizablePanel defaultSize={50} minSize={30} className="flex relative">
+        <ResizablePanel defaultSize={80} minSize={30} className="flex relative">
           <Score />
           <FullScreenButton />
           <Player />

@@ -5,6 +5,7 @@ import { BookOpen, GripVertical, Pause, Play, X } from "lucide-react";
 
 import { Button } from "@/app/components/ui/button";
 import { Separator } from "@/app/components/ui/separator";
+import { Label } from "@/app/components/ui/label";
 
 import { useScoreItemStore } from "@/app/stores/score-item-store";
 import { usePlayListStore } from "@/app/stores/play-list-store";
@@ -38,23 +39,25 @@ export default function PlayItem({ worship }: IPlayItem) {
   };
 
   return (
-    <div ref={setNodeRef} className="w-full " style={style} {...attributes}>
-      <div className="flex justify-between">
-        <div className="flex items-center space-x-2 overflow-hidden">
+    <div ref={setNodeRef} className="w-full" style={style} {...attributes}>
+      <div className="flex w-full">
+        <div className="pl-2 pr-2">
           <Button variant="ghost" size="icon" {...listeners}>
             <GripVertical />
           </Button>
-          <span
-            className={`truncate ${
+        </div>
+        <div className={`flex items-center overflow-hidden w-full`}>
+          <Label
+            className={`whitespace-nowrap animate-marquee ${
               playIndex === worship.index
                 ? "text-blue-700 dark:text-blue-300"
                 : ""
             }`}
           >
             {worship.title}
-          </span>
+          </Label>
         </div>
-        <div className="flex space-x-1">
+        <div className="min-w-[120px] flex items-center space-x-2">
           <Button variant="ghost" size="icon" onClick={setScore}>
             <BookOpen
               className={
