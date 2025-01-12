@@ -39,13 +39,17 @@ export default function PlayItem({ worship }: IPlayItem) {
   };
 
   return (
-    <div ref={setNodeRef} className="w-full" style={style} {...attributes}>
+    <div
+      ref={setNodeRef}
+      className={`w-full`}
+      id={`id-${worship.id}`}
+      style={style}
+      {...attributes}
+    >
       <div className="flex w-full">
-        <div className="pl-2 pr-2">
-          <Button variant="ghost" size="icon" {...listeners}>
-            <GripVertical />
-          </Button>
-        </div>
+        <Button variant="ghost" size="icon" {...listeners}>
+          <GripVertical />
+        </Button>
         <div className={`flex items-center overflow-hidden w-full`}>
           <Label
             className={`whitespace-nowrap animate-marquee ${

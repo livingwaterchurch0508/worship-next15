@@ -2,6 +2,7 @@ import {
   Dispatch,
   ForwardRefExoticComponent,
   RefAttributes,
+  RefObject,
   SetStateAction,
 } from "react";
 import { LucideProps } from "lucide-react";
@@ -36,7 +37,20 @@ export interface IPlayHymn extends IHymn {
   index: number;
 }
 
-export interface IPlayList {
+export interface IPlayList extends IDetailPlayer {
   showPlayList: boolean;
   setShowPlayListAction: Dispatch<SetStateAction<boolean>>;
+}
+
+export interface IDetailPlayer {
+  handlePrevPlay: () => void;
+  handlePause: () => void;
+  handlePlay: () => void;
+  handleNextPlay: (isEnded?: boolean) => void;
+  handleScore: () => void;
+  handlePlayMode: () => void;
+  progress: number;
+  progressBarRef: RefObject<HTMLDivElement | null>;
+  audioRef: RefObject<HTMLAudioElement | null>;
+  handleMouseDown: (event: React.MouseEvent<HTMLDivElement>) => void;
 }

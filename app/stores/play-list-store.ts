@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
 import { IHymn, IPlayHymn } from "@/app/variables/interfaces";
+import { PLAY_MODE, TPlayMode } from "@/app/variables/enums";
 
 interface IPlayListStore {
   playList: IPlayHymn[];
@@ -12,12 +13,15 @@ interface IPlayListStore {
   isPlaying: boolean;
   setIsPlaying: (isPlaying: boolean) => void;
   enablePlaySet: Set<number>;
+  playMode: TPlayMode;
+  setPlayMode: (playMode: TPlayMode) => void;
 }
 
 const usePlayListStore = create<IPlayListStore>((set) => ({
   playList: [],
   playIndex: null,
   isPlaying: false,
+  playMode: PLAY_MODE.B,
   enablePlaySet: new Set<number>(),
   setPlayList: (playList) => {
     const enablePlaySet: number[] = [];
@@ -85,6 +89,7 @@ const usePlayListStore = create<IPlayListStore>((set) => ({
     }),
   setPlayIndex: (playIndex) => set({ playIndex }),
   setIsPlaying: (isPlaying) => set({ isPlaying }),
+  setPlayMode: (playMode) => set({ playMode }),
 }));
 
 export { usePlayListStore };

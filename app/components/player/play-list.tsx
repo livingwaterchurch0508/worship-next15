@@ -26,12 +26,16 @@ import PlayItem from "@/app/components/player/play-item";
 import { Button } from "@/app/components/ui/button";
 import { usePlayListStore } from "@/app/stores/play-list-store";
 import { IPlayList } from "@/app/variables/interfaces";
+import DetailPlayer from "@/app/components/player/detail-player";
 
 export default function PlayList({
   showPlayList,
   setShowPlayListAction,
+  ...rest
 }: IPlayList) {
-  const { playList, setPlayList } = usePlayListStore((state) => state);
+  const { playList, setPlayList, playIndex } = usePlayListStore(
+    (state) => state,
+  );
   const [isVisible, setIsVisible] = useState(showPlayList);
 
   useEffect(() => {
@@ -64,6 +68,16 @@ export default function PlayList({
     }
   };
 
+  useEffect(() => {
+    const itemElement = document.getElementById(`id-${playIndex}`);
+    if (!itemElement) return;
+
+    itemElement.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+  }, [playIndex]);
+
   return isVisible ? (
     <Card
       className={`transition-transform duration-300 ${showPlayList ? "animate-slide-up" : "animate-slide-down"}`}
@@ -77,7 +91,8 @@ export default function PlayList({
         </div>
       </CardHeader>
       <CardContent>
-        <ScrollArea className="h-72 w-full rounded-md border p-4 dnd-context">
+        <DetailPlayer {...rest} />
+        <ScrollArea className="h-48 w-full rounded-md border p-4 dnd-context">
           <DndContext
             onDragEnd={onDragEnd}
             sensors={sensors}

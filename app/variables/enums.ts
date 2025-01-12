@@ -51,6 +51,13 @@ const SCORE_MODE = {
 
 export type TScoreMode = (typeof SCORE_MODE)[keyof typeof SCORE_MODE];
 
+const PLAY_MODE = {
+  B: "BASIC",
+  R: "REPEAT",
+};
+
+export type TPlayMode = (typeof PLAY_MODE)[keyof typeof PLAY_MODE];
+
 export {
   MENU_TYPES,
   MENU_TITLES,
@@ -58,4 +65,5 @@ export {
   WORSHIPS,
   SORT_TYPES,
   SCORE_MODE,
+  PLAY_MODE,
 };
