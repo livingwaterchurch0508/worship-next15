@@ -206,7 +206,7 @@ export function usePlayer() {
       audio?.removeEventListener("timeupdate", handleTimeUpdate);
       audio?.removeEventListener("ended", handleAudioEnded);
     };
-  }, [playIndex, enablePlaySet]);
+  }, [playIndex, enablePlaySet, playMode]);
 
   useEffect(() => {
     const audio = audioRef.current;
