@@ -175,6 +175,18 @@ const printsMock: IWorship[] = [
     isThisWeek: true,
   },
   { src: "프린트_065.jpg", title: "65.임재" },
+  {
+    src: "프린트_066.jpg",
+    title: "66.깊어진삶을주께",
+    song: "깊어진삶을주께.m4a",
+    isThisWeek: true,
+  },
+  {
+    src: "프린트_067.jpg",
+    title: "67.혼자걷지않을거예요",
+    song: "혼자걷지않을거예요.m4a",
+    isThisWeek: true,
+  },
 ];
 
 export const prints: IHymn[] = printsMock.map((print) => ({

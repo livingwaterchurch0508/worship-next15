@@ -51,7 +51,7 @@ const pastorsMock: IWorship[] = [
     title: "17.세상사람들은알수없는길",
   },
   { src: "18_주님가신그길.jpg", title: "18.주님가신그길" },
-  { src: "19_예수의보혈.jpg", title: "19.예수의보혈" },
+  { src: "19_예수의보혈.jpg", title: "19.예수의보혈", song: "예수의보혈.m4a" },
   { src: "20_주님의사랑으로.jpg", title: "20.주님의사랑으로" },
   {
     src: "21_주님의은혜를생각하면.jpg",
