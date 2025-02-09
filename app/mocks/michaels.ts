@@ -96,8 +96,6 @@ const michaelMock: IWorship[] = [
     title: "1933. 십자가그사랑멀리떠나서",
     song: "십자가그사랑.m4a",
     isMulti: 2,
-    isThisWeek: true,
-    isHomework: true,
   },
   {
     src: "십자가그사랑멀리떠나서-1.jpg",
@@ -293,6 +291,12 @@ const michaelMock: IWorship[] = [
     src: "왕이신나의하나님.jpg",
     title: "706.왕이신나의하나님",
     song: "왕이신나의하나님.m4a",
+  },
+  {
+    src: "내안에사는이.jpg",
+    title: "752.내안에사는이",
+    song: "내안에사는이.m4a",
+    isThisWeek: true,
   },
 ];
 
