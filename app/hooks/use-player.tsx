@@ -175,10 +175,10 @@ export function usePlayer() {
       navigator.mediaSession.setActionHandler("play", handlePlay);
       navigator.mediaSession.setActionHandler("pause", handlePause);
       navigator.mediaSession.setActionHandler("nexttrack", () =>
-        handleNextPlay(false),
+        handleNextPlay(true),
       );
       navigator.mediaSession.setActionHandler("previoustrack", () =>
-        handleNextPlay(false),
+        handlePrevPlay(),
       );
       audioRef.current?.play();
     }
