@@ -27,15 +27,20 @@ import { Button } from "@/app/components/ui/button";
 import { usePlayListStore } from "@/app/stores/play-list-store";
 import { IPlayList } from "@/app/variables/interfaces";
 import DetailPlayer from "@/app/components/player/detail-player";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/app/components/ui/tabs";
 
 export default function PlayList({
   showPlayList,
   setShowPlayListAction,
   ...rest
 }: IPlayList) {
-  const { playList, setPlayList, playIndex } = usePlayListStore(
-    (state) => state,
-  );
+  const { playList, setPlayList, playIndex, tabNo, setTabNo } =
+    usePlayListStore((state) => state);
   const [isVisible, setIsVisible] = useState(showPlayList);
 
   useEffect(() => {
@@ -64,7 +69,7 @@ export default function PlayList({
     if (active.id !== over.id) {
       const oldIndex = playList.findIndex(({ id }) => id === active.id);
       const newIndex = playList.findIndex(({ id }) => id === over.id);
-      setPlayList(arrayMove(playList, oldIndex, newIndex));
+      setPlayList(tabNo, arrayMove(playList, oldIndex, newIndex));
     }
   };
 
@@ -92,19 +97,30 @@ export default function PlayList({
       </CardHeader>
       <CardContent>
         <DetailPlayer {...rest} />
-        <ScrollArea className="h-48 w-full rounded-md border p-4 dnd-context">
-          <DndContext
-            onDragEnd={onDragEnd}
-            sensors={sensors}
-            collisionDetection={closestCenter}
-          >
-            <SortableContext items={playList}>
-              {playList.map((worship, index) => (
-                <PlayItem worship={worship} key={index} />
-              ))}
-            </SortableContext>
-          </DndContext>
-        </ScrollArea>
+        <Tabs onValueChange={setTabNo} value={tabNo}>
+          <TabsList defaultValue={tabNo} className="grid w-full grid-cols-3">
+            <TabsTrigger value="1">1</TabsTrigger>
+            <TabsTrigger value="2">2</TabsTrigger>
+            <TabsTrigger value="3">3</TabsTrigger>
+          </TabsList>
+          {["1", "2", "3"].map((value) => (
+            <TabsContent value={value} key={value} className="h-48">
+              <ScrollArea className="h-48 w-full rounded-md border p-4 dnd-context">
+                <DndContext
+                  onDragEnd={onDragEnd}
+                  sensors={sensors}
+                  collisionDetection={closestCenter}
+                >
+                  <SortableContext items={playList}>
+                    {playList.map((worship, index) => (
+                      <PlayItem worship={worship} key={index} />
+                    ))}
+                  </SortableContext>
+                </DndContext>
+              </ScrollArea>
+            </TabsContent>
+          ))}
+        </Tabs>
       </CardContent>
     </Card>
   ) : null;

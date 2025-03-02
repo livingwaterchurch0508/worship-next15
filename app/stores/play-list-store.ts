@@ -5,9 +5,9 @@ import { PLAY_MODE, TPlayMode } from "@/app/variables/enums";
 
 interface IPlayListStore {
   playList: IPlayHymn[];
-  setPlayList: (playList: IPlayHymn[]) => void;
-  addPlayList: (playItem: IHymn) => boolean;
-  removePlayList: (playItem: IHymn) => void;
+  setPlayList: (tabNo: string, playList: IPlayHymn[]) => void;
+  addPlayList: (tabNo: string, playItem: IHymn) => boolean;
+  removePlayList: (tabNo: string, playItem: IHymn) => void;
   playIndex: number | null;
   setPlayIndex: (playIndex: number | null) => void;
   isPlaying: boolean;
@@ -15,6 +15,8 @@ interface IPlayListStore {
   enablePlaySet: Set<number>;
   playMode: TPlayMode;
   setPlayMode: (playMode: TPlayMode) => void;
+  tabNo: string;
+  setTabNo: (tabNo: string) => void;
 }
 
 const usePlayListStore = create<IPlayListStore>((set) => ({
@@ -23,15 +25,20 @@ const usePlayListStore = create<IPlayListStore>((set) => ({
   isPlaying: false,
   playMode: PLAY_MODE.B,
   enablePlaySet: new Set<number>(),
-  setPlayList: (playList) => {
+  setPlayList: (tabNo, playList) => {
     const enablePlaySet: number[] = [];
     playList.forEach(({ song, index }) => {
       if (!!song) enablePlaySet.push(index);
     });
-    set({ playList, enablePlaySet: new Set(enablePlaySet) });
-    localStorage.setItem("playList", JSON.stringify(playList));
+    set({
+      playList,
+      enablePlaySet: new Set(enablePlaySet),
+      playIndex: enablePlaySet?.[0] ?? null,
+    });
+    localStorage.setItem("tabNo", `${tabNo}`);
+    localStorage.setItem(`${tabNo}_playList`, JSON.stringify(playList));
   },
-  addPlayList: (playItem) => {
+  addPlayList: (tabNo, playItem) => {
     let isDuplicate = false;
 
     set((state) => {
@@ -59,7 +66,10 @@ const usePlayListStore = create<IPlayListStore>((set) => ({
           }
         });
 
-        localStorage.setItem("playList", JSON.stringify(updatedPlayList));
+        localStorage.setItem(
+          `${tabNo}_playList`,
+          JSON.stringify(updatedPlayList),
+        );
 
         return {
           playList: updatedPlayList,
@@ -71,7 +81,7 @@ const usePlayListStore = create<IPlayListStore>((set) => ({
 
     return !isDuplicate;
   },
-  removePlayList: (playItem) =>
+  removePlayList: (tabNo, playItem) =>
     set((state) => {
       const updatedPlayList = state.playList.filter(
         (item: IHymn) => item.title !== playItem.title,
@@ -81,7 +91,10 @@ const usePlayListStore = create<IPlayListStore>((set) => ({
         if (!!song) enablePlayList.push(index);
       });
 
-      localStorage.setItem("playList", JSON.stringify(updatedPlayList));
+      localStorage.setItem(
+        `${tabNo}_playList`,
+        JSON.stringify(updatedPlayList),
+      );
       return {
         playList: updatedPlayList,
         enablePlaySet: new Set(enablePlayList),
@@ -90,6 +103,11 @@ const usePlayListStore = create<IPlayListStore>((set) => ({
   setPlayIndex: (playIndex) => set({ playIndex }),
   setIsPlaying: (isPlaying) => set({ isPlaying }),
   setPlayMode: (playMode) => set({ playMode }),
+  tabNo: "1",
+  setTabNo: (tabNo) => {
+    localStorage.setItem("tabNo", `${tabNo}`);
+    set({ tabNo });
+  },
 }));
 
 export { usePlayListStore };

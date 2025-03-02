@@ -17,8 +17,14 @@ interface IPlayItem {
 }
 
 export default function PlayItem({ worship }: IPlayItem) {
-  const { playIndex, isPlaying, removePlayList, setPlayIndex, setIsPlaying } =
-    usePlayListStore((state) => state);
+  const {
+    playIndex,
+    isPlaying,
+    removePlayList,
+    setPlayIndex,
+    setIsPlaying,
+    tabNo,
+  } = usePlayListStore((state) => state);
   const { scoreIndex, setScoreIndex, setScoreMode } = useScoreItemStore(
     (state) => state,
   );
@@ -107,7 +113,7 @@ export default function PlayItem({ worship }: IPlayItem) {
             variant="ghost"
             size="icon"
             onClick={() => {
-              removePlayList(worship);
+              removePlayList(tabNo, worship);
               if (playIndex === worship.index) {
                 setPlayIndex(null);
                 setIsPlaying(false);

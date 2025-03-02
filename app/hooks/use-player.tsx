@@ -106,17 +106,6 @@ export function usePlayer() {
     }
   };
 
-  /** 재생 시간 업데이트하기 */
-  const handleTimeUpdate = () => {
-    if (!audioRef.current) return;
-    const currentTime = audioRef.current.currentTime;
-    const duration = audioRef.current.duration;
-
-    if (duration > 0) {
-      setProgress((currentTime / duration) * 100);
-    }
-  };
-
   /** 재생시간 프로그래스 업데이트 하기 */
   const updateProgress = (clientX: number) => {
     const audio = audioRef.current;
@@ -155,11 +144,6 @@ export function usePlayer() {
     }
   };
 
-  /** 재생 종료시 */
-  const handleAudioEnded = () => {
-    handleNextPlay(true);
-  };
-
   const audioPlay = (findIndex: number) => {
     const worship = playList[findIndex];
     if ("mediaSession" in navigator) {
@@ -171,7 +155,6 @@ export function usePlayer() {
           { src: "/carousel/cross.jpg", sizes: "160x160", type: "image/jpeg" },
         ],
       });
-
       navigator.mediaSession.setActionHandler("play", handlePlay);
       navigator.mediaSession.setActionHandler("pause", handlePause);
       navigator.mediaSession.setActionHandler("nexttrack", () =>
@@ -190,6 +173,28 @@ export function usePlayer() {
       setScoreMode(scoreMode === SCORE_MODE.M ? SCORE_MODE.A : SCORE_MODE.M);
     }
     setScoreIndex(playIndex);
+  };
+
+  /** 재생 종료시 */
+  const handleAudioEnded = () => {
+    handleNextPlay(true);
+  };
+
+  /** 재생 시간 업데이트하기 */
+  const handleTimeUpdate = () => {
+    if (!audioRef.current) return;
+
+    const currentTime = audioRef.current.currentTime;
+    const duration = audioRef.current.duration;
+
+    if (currentTime > duration) {
+      handleNextPlay(true);
+      return;
+    }
+
+    if (duration > 0) {
+      setProgress((currentTime / duration) * 100);
+    }
   };
 
   const handlePlayMode = () => {

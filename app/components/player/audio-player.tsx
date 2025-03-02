@@ -40,7 +40,6 @@ export default function AudioPlayer({
 
   return (
     <Card>
-      <audio ref={audioRef} className="hidden" />
       <audio ref={audioRef} className="hidden" controls />
       <div className="flex w-full">
         <div className="pl-2 pr-2">

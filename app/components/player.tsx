@@ -11,16 +11,28 @@ import { IPlayHymn } from "@/app/variables/interfaces";
 
 export default function Player() {
   const [showPlayList, setShowPlayList] = useState(false);
-  const { setPlayList } = usePlayListStore((state) => state);
+  const { setPlayList, setTabNo, tabNo } = usePlayListStore((state) => state);
 
   const player = usePlayer();
 
   useEffect(() => {
-    const storedPlayList: IPlayHymn[] = JSON.parse(
-      localStorage.getItem("playList") || "[]",
-    );
-    setPlayList(storedPlayList.map((item) => ({ ...item, id: item.index })));
+    const storageTabNo = localStorage.getItem("tabNo") ?? tabNo;
+    setTabNo(storageTabNo);
   }, []);
+
+  useEffect(() => {
+    let storedPlayList: IPlayHymn[] = JSON.parse(
+      localStorage.getItem(`${tabNo}_playList`) || "[]",
+    );
+    if (storedPlayList.length === 0 && tabNo === "1") {
+      storedPlayList = JSON.parse(localStorage.getItem(`playList`) || "[]");
+    }
+
+    setPlayList(
+      tabNo,
+      storedPlayList.map((item) => ({ ...item, id: item.index })),
+    );
+  }, [tabNo]);
 
   return (
     <div className="w-full absolute bottom-0">

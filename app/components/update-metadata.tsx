@@ -12,7 +12,7 @@ export default function UpdateMetadata() {
       const worship =
         playList[playList.findIndex(({ index }) => index === playIndex)];
       if (worship) {
-        document.title = `${MENU_TITLES[worship.type].substring(0, 1)} ${worship.title} - 생수가 흐르는 교회💒 찬양집`;
+        document.title = `${MENU_TITLES[worship.type]?.substring(0, 1)} ${worship.title} - 생수가 흐르는 교회💒 찬양집`;
       }
     }
   }, [playList, playIndex]);

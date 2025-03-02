@@ -52,7 +52,7 @@ export default function DetailPlayer({
           <Label className="text-lg truncate overflow-ellipsis">
             {
               playList[playList.findIndex(({ index }) => index === playIndex)]
-                .title
+                ?.title
             }
           </Label>
           <Label className="text-muted-foreground truncate overflow-ellipsis">

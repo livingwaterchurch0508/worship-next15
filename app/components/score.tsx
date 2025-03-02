@@ -22,7 +22,7 @@ export default function Score() {
   const [isFirst, setIsFirst] = useState(true);
 
   useEffect(() => {
-    if (playIndex === null && scoreIndex === null) {
+    if (playIndex === null || scoreIndex === null) {
       const enableFirstPlayItem =
         enablePlaySet.size > 0
           ? enablePlaySet.values().next().value
@@ -59,10 +59,6 @@ export default function Score() {
       return;
     }
 
-    if (scoreIndex === null) {
-      setCurrentPlayItem(null);
-      return;
-    }
     const findIndex = playList.findIndex(({ index }) => index === scoreIndex);
 
     if (findIndex === -1) {

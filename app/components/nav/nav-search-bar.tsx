@@ -21,7 +21,7 @@ import { IHymn } from "@/app/variables/interfaces";
 import { MENU_TITLES, SORT_TYPES, WORSHIPS } from "@/app/variables/enums";
 
 export default function NavSearchBar() {
-  const { addPlayList } = usePlayListStore((state) => state);
+  const { addPlayList, tabNo } = usePlayListStore((state) => state);
   const { toast } = useToast();
 
   const [search, setSearch] = useState("");
@@ -52,7 +52,7 @@ export default function NavSearchBar() {
   };
 
   const handleAddPlayList = (worship: IHymn) => {
-    if (addPlayList(worship)) {
+    if (addPlayList(tabNo, worship)) {
       toast({
         title: "재생목록 추가",
         description: (

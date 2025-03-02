@@ -22,7 +22,7 @@ export default function WorshipList() {
   const { activeItem } = useActiveItemStore((state) => state);
   const { isFullScreen, setIsFullScreen, isAnimating, setIsAnimating } =
     useIsFullScreenStore((state) => state);
-  const { addPlayList } = usePlayListStore((state) => state);
+  const { addPlayList, tabNo } = usePlayListStore((state) => state);
   const { search, setSearch } = useSearchStore((state) => state);
   const { toast } = useToast();
 
@@ -71,7 +71,7 @@ export default function WorshipList() {
   };
 
   const handleAddPlayList = (worship: IHymn) => {
-    if (addPlayList(worship)) {
+    if (addPlayList(tabNo, worship)) {
       toast({
         title: "재생목록 추가",
         description: (

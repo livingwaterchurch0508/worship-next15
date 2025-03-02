@@ -169,3 +169,14 @@ body {
     display: block !important; /* display: table 제거 */
   }
 }
+
+/*---break---*/
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
