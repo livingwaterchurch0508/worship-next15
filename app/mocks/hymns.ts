@@ -645,6 +645,7 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_302.jpg",
     title: "302.내주하나님넓고큰은혜는",
     song: "내주하나님.m4a",
+    isThisWeek: true,
   },
   { src: "새찬송가반주용(A4사이즈)_303.jpg", title: "303.날위하여십자가의" },
   {
@@ -995,6 +996,8 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_447.jpg",
     title: "447.이세상끝날까지",
     song: "이세상끝날까지.m4a",
+    isThisWeek: true,
+    isHomework: true,
   },
   { src: "새찬송가반주용(A4사이즈)_448.jpg", title: "448.주님가신길을따라" },
   {
@@ -1157,8 +1160,6 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_510.jpg",
     title: "510.하나님의진리등대",
     song: "하나님의진리등대.m4a",
-    isThisWeek: true,
-    isHomework: true,
   },
   { src: "새찬송가반주용(A4사이즈)_511.jpg", title: "511.예수말씀하시기를" },
   { src: "새찬송가반주용(A4사이즈)_512.jpg", title: "512.천성길을버리고" },

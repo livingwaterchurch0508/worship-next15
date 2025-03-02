@@ -75,6 +75,8 @@ const michaelMock: IWorship[] = [
     src: "불속에라도들어가서.jpg",
     title: "1172. 불속에라도들어가서(죄악된)",
     song: "불속에라도들어가서.m4a",
+    isThisWeek: true,
+    isHomework: true,
   },
   {
     src: "감사찬송.jpg",
@@ -301,8 +303,6 @@ const michaelMock: IWorship[] = [
     src: "말씀하시면.jpg",
     title: "1757.말씀하시면",
     song: "말씀하시면.m4a",
-    isThisWeek: true,
-    isHomework: true,
   },
 ];
 

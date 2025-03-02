@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Info } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import {
@@ -13,14 +13,16 @@ import { ScrollArea } from "@/app/components/ui/scroll-area";
 import { P_2025 } from "@/app/mocks/patchs";
 
 export default function NavInfo() {
-  const [viewInfo, setViewInfo] = useState(
-    localStorage.getItem("view_03_02") ?? "false",
-  );
+  const [viewInfo, setViewInfo] = useState("false");
 
   const handleViewInfo = () => {
     setViewInfo("true");
     localStorage.setItem("view_03_02", "true");
   };
+
+  useEffect(() => {
+    setViewInfo(localStorage.getItem("view_03_02") ?? "false");
+  }, []);
 
   return (
     <Popover>
