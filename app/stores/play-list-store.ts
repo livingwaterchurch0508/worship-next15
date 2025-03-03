@@ -2,6 +2,7 @@ import { create } from "zustand";
 
 import { IHymn, IPlayHymn } from "@/app/variables/interfaces";
 import { PLAY_MODE, TPlayMode } from "@/app/variables/enums";
+import { useScoreItemStore } from "@/app/stores/score-item-store";
 
 interface IPlayListStore {
   playList: IPlayHymn[];
@@ -41,12 +42,15 @@ const usePlayListStore = create<IPlayListStore>((set) => ({
   addPlayList: (tabNo, playItem) => {
     let isDuplicate = false;
 
+    const { setScoreIndex } = useScoreItemStore.getState();
+
     set((state) => {
       const playList = state.playList;
 
-      isDuplicate = playList.some(
+      const findIndex = playList.findIndex(
         (item: IHymn) => item.title === playItem.title,
       );
+      isDuplicate = findIndex >= 0;
       if (!isDuplicate) {
         const lastIndex =
           state.playList.length === 0
@@ -71,11 +75,14 @@ const usePlayListStore = create<IPlayListStore>((set) => ({
           JSON.stringify(updatedPlayList),
         );
 
+        setScoreIndex(lastIndex);
+
         return {
           playList: updatedPlayList,
           enablePlaySet: new Set(enablePlayList),
         };
       }
+      setScoreIndex(playList[findIndex].index);
       return state;
     });
 

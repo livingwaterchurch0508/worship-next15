@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { Bell } from "lucide-react";
 
 import {
@@ -11,11 +14,31 @@ import { ScrollArea } from "@/app/components/ui/scroll-area";
 import { H_2024 } from "@/app/mocks/homeworks";
 
 export default function NavHomework() {
+  const HOMEWORK_KEY = "view_homework_03_02";
+  const [viewHomeWork, setViewHomeWork] = useState("false");
+
+  const handleViewHomerWork = () => {
+    setViewHomeWork("true");
+    localStorage.setItem(HOMEWORK_KEY, "true");
+  };
+
+  useEffect(() => {
+    setViewHomeWork(localStorage.getItem(HOMEWORK_KEY) ?? "false");
+  }, []);
+
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="ghost" size="icon" className="h-7 w-7">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="h-7 w-7 relative"
+          onClick={handleViewHomerWork}
+        >
           <Bell />
+          {viewHomeWork === "false" && (
+            <div className="absolute top-1.5 right-1 size-2 bg-red-500 rounded-full" />
+          )}
         </Button>
       </PopoverTrigger>
       <PopoverContent>

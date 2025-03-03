@@ -15,6 +15,7 @@ import { useActiveItemStore } from "@/app/stores/active-item-store";
 import { useIsFullScreenStore } from "@/app/stores/full-screen-store";
 import { usePlayListStore } from "@/app/stores/play-list-store";
 import { useSearchStore } from "@/app/stores/search-store";
+import { useScoreItemStore } from "@/app/stores/score-item-store";
 import { SORT_TYPES, WORSHIPS } from "@/app/variables/enums";
 import { IHymn } from "@/app/variables/interfaces";
 
@@ -23,6 +24,7 @@ export default function WorshipList() {
   const { isFullScreen, setIsFullScreen, isAnimating, setIsAnimating } =
     useIsFullScreenStore((state) => state);
   const { addPlayList, tabNo } = usePlayListStore((state) => state);
+  const { setScoreIndex } = useScoreItemStore((state) => state);
   const { search, setSearch } = useSearchStore((state) => state);
   const { toast } = useToast();
 
