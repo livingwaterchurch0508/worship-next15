@@ -645,7 +645,6 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_302.jpg",
     title: "302.내주하나님넓고큰은혜는",
     song: "내주하나님.m4a",
-    isThisWeek: true,
   },
   { src: "새찬송가반주용(A4사이즈)_303.jpg", title: "303.날위하여십자가의" },
   {
@@ -671,6 +670,7 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_312.jpg",
     title: "312.너하나님께이끌리어",
     song: "너하나님께이끌리어.m4a",
+    isThisWeek: true,
   },
   { src: "새찬송가반주용(A4사이즈)_313.jpg", title: "313.내임금예수내주여" },
   {
@@ -782,6 +782,8 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_357.jpg",
     title: "357.주믿는사람일어나",
     song: "주믿는사람일어나.m4a",
+    isThisWeek: true,
+    isHomework: true,
   },
   {
     src: "새찬송가반주용(A4사이즈)_358.jpg",
@@ -996,8 +998,6 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_447.jpg",
     title: "447.이세상끝날까지",
     song: "이세상끝날까지.m4a",
-    isThisWeek: true,
-    isHomework: true,
   },
   { src: "새찬송가반주용(A4사이즈)_448.jpg", title: "448.주님가신길을따라" },
   {
@@ -1036,6 +1036,8 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_460.jpg",
     title: "460.뜻없이무릎꿇는",
     song: "뜻없이무릎꿇는.m4a",
+    isThisWeek: true,
+    isHomework: true,
   },
   { src: "새찬송가반주용(A4사이즈)_461.jpg", title: "461.십자가를질수있나" },
   { src: "새찬송가반주용(A4사이즈)_462.jpg", title: "462.생명진리은혜되신" },
