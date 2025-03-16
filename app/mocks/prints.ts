@@ -82,7 +82,6 @@ const printsMock: IWorship[] = [
     src: "프린트_026.jpg",
     title: "26.나는믿네",
     song: "나는믿네.m4a",
-    isThisWeek: true,
   },
   { src: "프린트_027.jpg", title: "27.시선" },
   {
@@ -94,7 +93,6 @@ const printsMock: IWorship[] = [
     src: "프린트_029.jpg",
     title: "29.예수안에소망있네",
     song: "예수안에소망있네.m4a",
-    isThisWeek: true,
   },
   { src: "프린트_030.jpg", title: "30.주의이름높이며주를찬양" },
   { src: "프린트_031.jpg", title: "31.내주의은혜강가로" },
@@ -103,6 +101,7 @@ const printsMock: IWorship[] = [
     src: "프린트_033.jpg",
     title: "33.나는믿노라",
     song: "나는믿노라.m4a",
+    isThisWeek: true,
   },
   {
     src: "프린트_034.jpg",
@@ -187,7 +186,6 @@ const printsMock: IWorship[] = [
     src: "프린트_066.jpg",
     title: "66.깊어진삶을주께",
     song: "깊어진삶을주께.m4a",
-    isThisWeek: true,
   },
   {
     src: "프린트_067.jpg",
