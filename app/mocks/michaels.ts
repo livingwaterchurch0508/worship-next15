@@ -309,6 +309,16 @@ const michaelMock: IWorship[] = [
     title: "1637.주님손잡고일어서세요",
     song: "주님손잡고일어서세요.m4a",
   },
+  {
+    src: "주님뜻대로살기로했네.jpg",
+    title: "658.주님뜻대로살기로했네",
+    song: "주님뜻대로살기로했네.m4a",
+  },
+  {
+    src: "야베스의기도.jpg",
+    title: "15.야베스의기도",
+    song: "야베스의기도.m4a",
+  },
 ];
 
 export const michaels: IHymn[] = michaelMock.map((michael) => ({
