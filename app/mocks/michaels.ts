@@ -50,7 +50,6 @@ const michaelMock: IWorship[] = [
     src: "약한나를강하게.jpg",
     title: "1726. 약한나를강하게",
     song: "1726약한나를강하게.m4a",
-    isThisWeek: true,
   },
   {
     src: "사명.jpg",
@@ -233,6 +232,8 @@ const michaelMock: IWorship[] = [
     title: "17. 하나님의은혜",
     song: "하나님의은혜.m4a",
     isMulti: 2,
+    isThisWeek: true,
+    isHomework: true,
   },
   {
     src: "하나님의은혜-1.jpg",

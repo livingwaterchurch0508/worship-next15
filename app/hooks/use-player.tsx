@@ -55,7 +55,13 @@ export function usePlayer() {
   const handlePlay = () => {
     if (playIndex === null) return;
 
-    audioRef.current?.play();
+    audioRef.current?.addEventListener("loadeddata", () => {
+      audioRef.current?.play().catch((error) => {
+        if (error.name !== "AbortError") {
+          /** empty */
+        }
+      });
+    });
     setIsPlaying(true);
   };
 
