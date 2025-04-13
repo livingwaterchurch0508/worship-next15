@@ -36,7 +36,6 @@ export function usePlayer() {
       if (audioRef.current) {
         audioRef.current.currentTime = 0;
         audioRef.current?.play();
-        audioRef.current.play();
         setIsPlaying(true);
         return;
       }
@@ -56,11 +55,18 @@ export function usePlayer() {
     if (playIndex === null) return;
 
     audioRef.current?.addEventListener("loadeddata", () => {
-      audioRef.current?.play().catch((error) => {
-        if (error.name !== "AbortError") {
-          /** empty */
-        }
-      });
+      const tryPlay = (retryCount = 0) => {
+        audioRef.current?.play().catch((error) => {
+          if (retryCount < 3) {
+            // 1초 후 재시도
+            setTimeout(() => tryPlay(retryCount + 1), 1000);
+          } else {
+            console.error("play 실패:", error);
+          }
+        });
+      };
+
+      tryPlay();
     });
     setIsPlaying(true);
   };
