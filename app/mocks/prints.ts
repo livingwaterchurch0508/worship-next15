@@ -24,6 +24,7 @@ const printsMock: IWorship[] = [
     src: "프린트_010.jpg",
     title: "10.십자가의전달자",
     song: "십자가의전달자.m4a",
+    isThisWeek: true,
   },
   {
     src: "프린트_011.jpg",
@@ -34,11 +35,13 @@ const printsMock: IWorship[] = [
     src: "프린트_012.jpg",
     title: "12.생명나무",
     song: "생명나무.m4a",
+    isThisWeek: true,
   },
   {
     src: "프린트_013.jpg",
     title: "13.나오직주님만을",
     song: "나오직주님만을.m4a",
+    isThisWeek: true,
   },
   {
     src: "프린트_014.jpg",
@@ -71,7 +74,6 @@ const printsMock: IWorship[] = [
     src: "프린트_023.jpg",
     title: "23.주가일하시네",
     song: "주가일하시네.m4a",
-    isThisWeek: true,
   },
   {
     src: "프린트_024.jpg",
@@ -111,7 +113,12 @@ const printsMock: IWorship[] = [
   { src: "프린트_035.jpg", title: "35.내삶을주께드리며" },
   { src: "프린트_036.jpg", title: "36.선한능력으로" },
   { src: "프린트_037.jpg", title: "37.내영혼아여호와를송축하라" },
-  { src: "프린트_038.jpg", title: "38.기억하라", song: "기억하라.m4a" },
+  {
+    src: "프린트_038.jpg",
+    title: "38.기억하라",
+    song: "기억하라.m4a",
+    isThisWeek: true,
+  },
   { src: "프린트_039.jpg", title: "39.길을만드시는주" },
   { src: "프린트_040.jpg", title: "40.거룩하신주님", isMulti: 2 },
   { src: "프린트_040-1.jpg", title: "40.거룩하신주님" },
@@ -145,7 +152,12 @@ const printsMock: IWorship[] = [
     song: "내가주를향하여.m4a",
   },
   { src: "프린트_050.jpg", title: "50.하나님의약속" },
-  { src: "프린트_051.jpg", title: "51.하늘소망", song: "하늘소망.m4a" },
+  {
+    src: "프린트_051.jpg",
+    title: "51.하늘소망",
+    song: "하늘소망.m4a",
+    isThisWeek: true,
+  },
   { src: "프린트_052.jpg", title: "52.다시복음앞에" },
   { src: "프린트_053.jpg", title: "53.다시복음으로" },
   { src: "프린트_054.jpg", title: "54.오늘을위한기도" },
@@ -172,6 +184,7 @@ const printsMock: IWorship[] = [
     title: "61.마라나타",
     song: "마라나타.m4a",
     isMulti: 2,
+    isThisWeek: true,
   },
   { src: "프린트_061-1.jpg", title: "61.마라나타" },
   { src: "프린트_062.jpg", title: "62.주사랑이나를숨쉬게해" },
@@ -191,7 +204,6 @@ const printsMock: IWorship[] = [
     src: "프린트_067.jpg",
     title: "67.혼자걷지않을거예요",
     song: "혼자걷지않을거예요.m4a",
-    isThisWeek: true,
   },
 ];
 
