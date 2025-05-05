@@ -49,6 +49,7 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_20.jpg",
     title: "20.큰영광중에계신주",
     song: "큰영광중에계신주.m4a",
+    isThisWeek: true,
   },
   {
     src: "새찬송가반주용(A4사이즈)_21.jpg",
@@ -514,7 +515,6 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_254.jpg",
     title: "254.내주의보혈은",
     song: "내주의보혈은.m4a",
-    isThisWeek: true,
   },
   { src: "새찬송가반주용(A4사이즈)_255.jpg", title: "255.너희죄흉악하나" },
   {
@@ -604,6 +604,8 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_284.jpg",
     title: "284.오랫동안모든죄가운데빠져",
     song: "오랫동안모든죄가운데빠져.m4a",
+    isThisWeek: true,
+    isHomework: true,
   },
   { src: "새찬송가반주용(A4사이즈)_285.jpg", title: "285.주의말씀받은그날" },
   {
@@ -633,6 +635,8 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_292.jpg",
     title: "292.주없이살수없네",
     song: "주업이살수업네.m4a",
+    isThisWeek: true,
+    isHomework: true,
   },
   {
     src: "새찬송가반주용(A4사이즈)_293.jpg",
@@ -942,6 +946,8 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_415.jpg",
     title: "415.십자가그늘아래",
     song: "십자그늘아래.m4a",
+    isThisWeek: true,
+    isHomework: true,
   },
   { src: "새찬송가반주용(A4사이즈)_416.jpg", title: "416.너희근심걱정을" },
   { src: "새찬송가반주용(A4사이즈)_417.jpg", title: "417.주예수넓은품에" },
@@ -995,8 +1001,6 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_436.jpg",
     title: "436.나이제주님의새생명얻은몸",
     song: "나이제주님의새생명얻은몸.m4a",
-    isThisWeek: true,
-    isHomework: true,
   },
   { src: "새찬송가반주용(A4사이즈)_437.jpg", title: "437.하늘보좌떠나서" },
   {
