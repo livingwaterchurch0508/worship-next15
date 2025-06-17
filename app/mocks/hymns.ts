@@ -49,7 +49,6 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_20.jpg",
     title: "20.큰영광중에계신주",
     song: "큰영광중에계신주.m4a",
-    isThisWeek: true,
   },
   {
     src: "새찬송가반주용(A4사이즈)_21.jpg",
@@ -177,6 +176,8 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_81.jpg",
     title: "81.주는귀한보배",
     song: "주는귀한보배.m4a",
+    isThisWeek: true,
+    isHomework: true,
   },
   { src: "새찬송가반주용(A4사이즈)_82.jpg", title: "82.성부의어린양이" },
   { src: "새찬송가반주용(A4사이즈)_83.jpg", title: "83.나의맘에근심구름" },
@@ -490,6 +491,8 @@ const hymnsMock: IWorship[] = [
   {
     src: "새찬송가반주용(A4사이즈)_246.jpg",
     title: "246.나가나안땅귀한성에",
+    song: "나가나안땅귀한성에.m4a",
+    isThisWeek: true,
   },
   { src: "새찬송가반주용(A4사이즈)_247.jpg", title: "247.보아라저하늘에" },
   { src: "새찬송가반주용(A4사이즈)_248.jpg", title: "248.언약의주하나님" },
@@ -604,8 +607,6 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_284.jpg",
     title: "284.오랫동안모든죄가운데빠져",
     song: "오랫동안모든죄가운데빠져.m4a",
-    isThisWeek: true,
-    isHomework: true,
   },
   { src: "새찬송가반주용(A4사이즈)_285.jpg", title: "285.주의말씀받은그날" },
   {
@@ -635,8 +636,6 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_292.jpg",
     title: "292.주없이살수없네",
     song: "주업이살수업네.m4a",
-    isThisWeek: true,
-    isHomework: true,
   },
   {
     src: "새찬송가반주용(A4사이즈)_293.jpg",
@@ -946,8 +945,6 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_415.jpg",
     title: "415.십자가그늘아래",
     song: "십자그늘아래.m4a",
-    isThisWeek: true,
-    isHomework: true,
   },
   { src: "새찬송가반주용(A4사이즈)_416.jpg", title: "416.너희근심걱정을" },
   { src: "새찬송가반주용(A4사이즈)_417.jpg", title: "417.주예수넓은품에" },
@@ -1103,7 +1100,11 @@ const hymnsMock: IWorship[] = [
   { src: "새찬송가반주용(A4사이즈)_475.jpg", title: "475.인류는하나되게" },
   { src: "새찬송가반주용(A4사이즈)_476.jpg", title: "476.꽃이피고새가우는" },
   { src: "새찬송가반주용(A4사이즈)_477.jpg", title: "477.하나님이창조하신" },
-  { src: "새찬송가반주용(A4사이즈)_478.jpg", title: "478.참아름다워라" },
+  {
+    src: "새찬송가반주용(A4사이즈)_478.jpg",
+    title: "478.참아름다워라",
+    song: "참아름다워라.m4a",
+  },
   {
     src: "새찬송가반주용(A4사이즈)_479.jpg",
     title: "479.괴로운인생길가는몸이",
@@ -1174,7 +1175,11 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_501.jpg",
     title: "501.너시온아이소식전파하라",
   },
-  { src: "새찬송가반주용(A4사이즈)_502.jpg", title: "502.빛의사자들이여" },
+  {
+    src: "새찬송가반주용(A4사이즈)_502.jpg",
+    title: "502.빛의사자들이여",
+    song: "빛의사자들이여.m4a",
+  },
   {
     src: "새찬송가반주용(A4사이즈)_503.jpg",
     title: "503.세상모두사랑없어냉랭함을아느냐",

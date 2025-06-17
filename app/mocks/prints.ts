@@ -82,6 +82,7 @@ const printsMock: IWorship[] = [
     src: "프린트_026.jpg",
     title: "26.나는믿네",
     song: "나는믿네.m4a",
+    isThisWeek: true,
   },
   { src: "프린트_027.jpg", title: "27.시선" },
   {
@@ -129,7 +130,6 @@ const printsMock: IWorship[] = [
     src: "프린트_044.jpg",
     title: "44.나는순례자",
     song: "나는순례자.m4a",
-    isThisWeek: true,
   },
   {
     src: "프린트_045.jpg",
@@ -184,7 +184,6 @@ const printsMock: IWorship[] = [
     title: "61.마라나타",
     song: "마라나타.m4a",
     isMulti: 2,
-    isThisWeek: true,
   },
   { src: "프린트_061-1.jpg", title: "61.마라나타" },
   { src: "프린트_062.jpg", title: "62.주사랑이나를숨쉬게해" },
