@@ -21,7 +21,12 @@ const pastorsMock: IWorship[] = [
   { src: "7_나주님과함께-1.jpg", title: "7.나주님과함께" },
   { src: "8_여호와는나의목자.jpg", title: "8.여호와는나의목자", isMulti: 2 },
   { src: "8_여호와는나의목자-1.jpg", title: "8.여호와는나의목자" },
-  { src: "9_하나님나의아버지.jpg", title: "9.하나님나의아버지" },
+  {
+    src: "9_하나님나의아버지.jpg",
+    title: "9.하나님나의아버지",
+    song: "하나님나의아버지.m4a",
+    isThisWeek: true,
+  },
   { src: "10_주여감사하옵나이다.jpg", title: "10.주여감사하옵나이다" },
   {
     src: "11_아침이슬내린그아침에.jpg",

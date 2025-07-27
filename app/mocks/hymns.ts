@@ -170,14 +170,14 @@ const hymnsMock: IWorship[] = [
   {
     src: "새찬송가반주용(A4사이즈)_79.jpg",
     title: "79.주하나님지으신모든세계",
+    song: "주하나님지으신모든세계.m4a",
+    isThisWeek: true,
   },
   { src: "새찬송가반주용(A4사이즈)_80.jpg", title: "80.천지에있는이름중" },
   {
     src: "새찬송가반주용(A4사이즈)_81.jpg",
     title: "81.주는귀한보배",
     song: "주는귀한보배.m4a",
-    isThisWeek: true,
-    isHomework: true,
   },
   { src: "새찬송가반주용(A4사이즈)_82.jpg", title: "82.성부의어린양이" },
   { src: "새찬송가반주용(A4사이즈)_83.jpg", title: "83.나의맘에근심구름" },
@@ -481,6 +481,7 @@ const hymnsMock: IWorship[] = [
   {
     src: "새찬송가반주용(A4사이즈)_242.jpg",
     title: "242.황무지가장미꽃같이",
+    song: "황무지가장미꽃같이.m4a",
   },
   { src: "새찬송가반주용(A4사이즈)_243.jpg", title: "243.저요단강건너편에" },
   {
@@ -492,7 +493,6 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_246.jpg",
     title: "246.나가나안땅귀한성에",
     song: "나가나안땅귀한성에.m4a",
-    isThisWeek: true,
   },
   { src: "새찬송가반주용(A4사이즈)_247.jpg", title: "247.보아라저하늘에" },
   { src: "새찬송가반주용(A4사이즈)_248.jpg", title: "248.언약의주하나님" },
@@ -810,6 +810,7 @@ const hymnsMock: IWorship[] = [
   {
     src: "새찬송가반주용(A4사이즈)_359.jpg",
     title: "359.천성을향해가는성도들아",
+    isHomework: true,
   },
   {
     src: "새찬송가반주용(A4사이즈)_360.jpg",
@@ -1034,12 +1035,14 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_447.jpg",
     title: "447.이세상끝날까지",
     song: "이세상끝날까지.m4a",
+    isThisWeek: true,
   },
   { src: "새찬송가반주용(A4사이즈)_448.jpg", title: "448.주님가신길을따라" },
   {
     src: "새찬송가반주용(A4사이즈)_449.jpg",
     title: "449.예수따라가며",
     song: "예수따라가며.m4a",
+    isThisWeek: true,
   },
   { src: "새찬송가반주용(A4사이즈)_450.jpg", title: "450.내평생소원이것뿐" },
   { src: "새찬송가반주용(A4사이즈)_451.jpg", title: "451.예수영광버리사" },

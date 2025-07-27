@@ -82,7 +82,6 @@ const printsMock: IWorship[] = [
     src: "프린트_026.jpg",
     title: "26.나는믿네",
     song: "나는믿네.m4a",
-    isThisWeek: true,
   },
   { src: "프린트_027.jpg", title: "27.시선" },
   {
@@ -203,6 +202,23 @@ const printsMock: IWorship[] = [
     src: "프린트_067.jpg",
     title: "67.혼자걷지않을거예요",
     song: "혼자걷지않을거예요.m4a",
+  },
+  {
+    src: "주님을예배하는것(빛으로임하신주).jpg",
+    title: "68.주님을예배하는것(빛으로임하신주)",
+    song: "주님을예배하는것.m4a",
+  },
+  {
+    src: "주하나님독생자예수.jpg",
+    title: "69.주하나님독생자예수",
+    song: "주하나님독생자예수.m4a",
+  },
+  {
+    src: "주님말씀하시면.jpg",
+    title: "70.주님말씀하시면",
+    song: "주님말씀하시면.m4a",
+    isThisWeek: true,
+    isHomework: true,
   },
 ];
 

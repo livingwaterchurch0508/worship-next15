@@ -78,8 +78,9 @@ const michaelMock: IWorship[] = [
   },
   {
     src: "감사찬송.jpg",
-    title: "1601.감사찬송",
-    song: "감사찬송.m4a",
+    title: "1601.날구원하신주감사",
+    song: "날구원하신주감사.m4a",
+    isThisWeek: true,
   },
   {
     src: "또하나의열매를바라시며.jpg",
@@ -266,7 +267,6 @@ const michaelMock: IWorship[] = [
     src: "온맘다해(주님과함께하는).jpg",
     title: "1951.온맘다해(주님과함께하는)",
     song: "온맘다해.m4a",
-    isThisWeek: true,
   },
   {
     src: "달리다굼.jpg",
@@ -317,6 +317,21 @@ const michaelMock: IWorship[] = [
     src: "야베스의기도.jpg",
     title: "15.야베스의기도",
     song: "야베스의기도.m4a",
+  },
+  {
+    src: "나의주나의하나님이여.jpg",
+    title: "1741.나의주나의하나님이여",
+    song: "나의주나의하나님이여.m4a",
+  },
+  {
+    src: "주여나에게.jpg",
+    title: "1213.주여나에게",
+    isMulti: 2,
+    song: "주여나에게.m4a",
+  },
+  {
+    src: "주여나에게-1.jpg",
+    title: "1213.주여나에게",
   },
 ];
 
