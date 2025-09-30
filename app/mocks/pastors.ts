@@ -25,7 +25,6 @@ const pastorsMock: IWorship[] = [
     src: "9_하나님나의아버지.jpg",
     title: "9.하나님나의아버지",
     song: "하나님나의아버지.m4a",
-    isThisWeek: true,
   },
   { src: "10_주여감사하옵나이다.jpg", title: "10.주여감사하옵나이다" },
   {

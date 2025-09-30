@@ -80,7 +80,6 @@ const michaelMock: IWorship[] = [
     src: "감사찬송.jpg",
     title: "1601.날구원하신주감사",
     song: "날구원하신주감사.m4a",
-    isThisWeek: true,
   },
   {
     src: "또하나의열매를바라시며.jpg",
@@ -332,6 +331,16 @@ const michaelMock: IWorship[] = [
   {
     src: "주여나에게-1.jpg",
     title: "1213.주여나에게",
+  },
+  {
+    src: "주여호와는광대하시도다.jpg",
+    title: "798.주여호와는광대하시도다",
+    song: "주여호와는광대하시도다.m4a",
+  },
+  {
+    src: "하나님은너를만드신분(하나님이시여).jpg",
+    title: "1936.하나님은너를만드신분(하나님이시여)",
+    song: "하나님은너를만드신분(하나님이시여).m4a",
   },
 ];
 

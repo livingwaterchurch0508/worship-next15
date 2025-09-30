@@ -217,8 +217,6 @@ const printsMock: IWorship[] = [
     src: "주님말씀하시면.jpg",
     title: "70.주님말씀하시면",
     song: "주님말씀하시면.m4a",
-    isThisWeek: true,
-    isHomework: true,
   },
 ];
 

@@ -14,8 +14,8 @@ import { ScrollArea } from "@/app/components/ui/scroll-area";
 import { H_2024 } from "@/app/mocks/homeworks";
 
 export default function NavHomework() {
-  const HOMEWORK_KEY = "view_homework_07_27";
-  const REMOVE_HOMEWORK_KEY = "view_homework_07_13";
+  const HOMEWORK_KEY = "view_homework_09_28";
+  const REMOVE_HOMEWORK_KEY = "view_homework_09_21";
   const [viewHomeWork, setViewHomeWork] = useState("false");
 
   const handleViewHomerWork = () => {
