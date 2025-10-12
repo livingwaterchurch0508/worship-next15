@@ -22,7 +22,7 @@ export default function Score() {
   const [isFirst, setIsFirst] = useState(true);
 
   useEffect(() => {
-    if (playIndex === null || scoreIndex === null) {
+    if (scoreIndex === null) {
       const enableFirstPlayItem =
         enablePlaySet.size > 0
           ? enablePlaySet.values().next().value

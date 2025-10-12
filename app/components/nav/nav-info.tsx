@@ -13,7 +13,8 @@ import { ScrollArea } from "@/app/components/ui/scroll-area";
 import { P_2025 } from "@/app/mocks/patchs";
 
 export default function NavInfo() {
-  const INFO_KEY = "view_info_03_03";
+  const INFO_KEY = "view_info_10_12";
+  const REMOVE_INFO_KEY = "view_info_03_03";
   const [viewInfo, setViewInfo] = useState("false");
 
   const handleViewInfo = () => {
@@ -22,6 +23,7 @@ export default function NavInfo() {
   };
 
   useEffect(() => {
+    localStorage.removeItem(REMOVE_INFO_KEY);
     setViewInfo(localStorage.getItem(INFO_KEY) ?? "false");
   }, []);
 
