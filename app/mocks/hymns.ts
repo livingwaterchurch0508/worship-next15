@@ -622,6 +622,8 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_289.jpg",
     title: "289.주예수내맘에들어와",
     song: "주예수내맘에들어와.m4a",
+    isThisWeek: true,
+    isHomework: true,
   },
   {
     src: "새찬송가반주용(A4사이즈)_290.jpg",
@@ -781,6 +783,8 @@ const hymnsMock: IWorship[] = [
   {
     src: "새찬송가반주용(A4사이즈)_351.jpg",
     title: "351.믿는사람들은주의군사니",
+    song: "믿는사람들은주의군사니.m4a",
+    isThisWeek: true,
   },
   { src: "새찬송가반주용(A4사이즈)_352.jpg", title: "352.십자가군병들아" },
   {
@@ -791,6 +795,8 @@ const hymnsMock: IWorship[] = [
   {
     src: "새찬송가반주용(A4사이즈)_354.jpg",
     title: "354.주를앙모하는자",
+    song: "주를앙모하는자.m4a",
+    isThisWeek: true,
   },
   { src: "새찬송가반주용(A4사이즈)_355.jpg", title: "355.다같이일어나" },
   {
@@ -806,8 +812,6 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_358.jpg",
     title: "358.주의진리위해십자가군기",
     song: "주의진리위해십자가군기.m4a",
-    isThisWeek: true,
-    isHomework: true,
   },
   {
     src: "새찬송가반주용(A4사이즈)_359.jpg",
@@ -911,7 +915,6 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_400.jpg",
     title: "400.험한시험물속에서",
     song: "험한시험물속에서.m4a",
-    isThisWeek: true,
   },
   { src: "새찬송가반주용(A4사이즈)_401.jpg", title: "401.주의곁에있을때" },
   { src: "새찬송가반주용(A4사이즈)_402.jpg", title: "402.나의반석나의방패" },
@@ -1195,7 +1198,12 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_504.jpg",
     title: "504.주님의명령전할사자여",
   },
-  { src: "새찬송가반주용(A4사이즈)_505.jpg", title: "505.온세상위하여" },
+  {
+    src: "새찬송가반주용(A4사이즈)_505.jpg",
+    title: "505.온세상위하여",
+    song: "온세상위하여.m4a",
+    isThisWeek: true,
+  },
   { src: "새찬송가반주용(A4사이즈)_506.jpg", title: "506.땅끝까지복음을" },
   { src: "새찬송가반주용(A4사이즈)_507.jpg", title: "507.저북방얼음산과" },
   {
@@ -1235,8 +1243,6 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_523.jpg",
     title: "523.어둔죄악길에서",
     song: "어둔죄악길에서.m4a",
-    isThisWeek: true,
-    isHomework: true,
   },
   {
     src: "새찬송가반주용(A4사이즈)_524.jpg",
@@ -1400,7 +1406,6 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_595.jpg",
     title: "595.나맡은본분은",
     song: "나맡은본분은.m4a",
-    isThisWeek: true,
   },
   { src: "새찬송가반주용(A4사이즈)_596.jpg", title: "596.영광은주님홀로" },
   {
@@ -1446,7 +1451,6 @@ const hymnsMock: IWorship[] = [
     src: "새찬송가반주용(A4사이즈)_620.jpg",
     title: "620.여기에모인우리",
     song: "620여기에모인우리.m4a",
-    isThisWeek: true,
   },
   { src: "새찬송가반주용(A4사이즈)_621.jpg", title: "621.찬양하라내영혼아" },
   { src: "새찬송가반주용(A4사이즈)_622.jpg", title: "622.거룩한밤" },

@@ -76,6 +76,7 @@ const printsMock: IWorship[] = [
     src: "프린트_024.jpg",
     title: "24.아무것도두려워말라",
     song: "아무것도두려워말라.m4a",
+    isThisWeek: true,
   },
   { src: "프린트_025.jpg", title: "25.이모든것이주님의은혜" },
   {
@@ -191,6 +192,7 @@ const printsMock: IWorship[] = [
     src: "프린트_064.jpg",
     title: "64.내주를가까이더욱가까이",
     song: "내주를가까이.m4a",
+    isThisWeek: true,
   },
   { src: "프린트_065.jpg", title: "65.임재" },
   {

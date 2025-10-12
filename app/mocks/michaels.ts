@@ -16,6 +16,7 @@ const michaelMock: IWorship[] = [
     title: "2066. 전능하신나의주하나님",
     song: "전능하신나의주하나님은.m4a",
     isMulti: 2,
+    isThisWeek: true,
   },
   {
     src: "전능하신나의주하나님-1.jpg",
@@ -341,6 +342,18 @@ const michaelMock: IWorship[] = [
     src: "하나님은너를만드신분(하나님이시여).jpg",
     title: "1936.하나님은너를만드신분(하나님이시여)",
     song: "하나님은너를만드신분(하나님이시여).m4a",
+  },
+  {
+    src: "똑바로보고싶어요.jpg",
+    title: "851.똑바로보고싶어요",
+    isMulti: 2,
+    song: "똑바로보고싶어요.m4a",
+    isThisWeek: true,
+    isHomework: true,
+  },
+  {
+    src: "똑바로보고싶어요-1.jpg",
+    title: "851.똑바로보고싶어요",
   },
 ];
 
